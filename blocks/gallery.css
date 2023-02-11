@@ -17,18 +17,18 @@
   border-radius: 10px;
   overflow: hidden;
 }
-.gallery__card_image {
+.gallery__card-image {
   width: 282px;
   height: 282px;
 }
-.gallery__card_description {
+.gallery__card-description {
   display: flex;
   height: 79px;
   justify-content: space-between;
   background-color: white;
   align-items: center;
 }
-.gallery__card_title {
+.gallery__card-title {
   max-width: 220px;
   font-size: 24px;
   font-weight: 900;
@@ -39,7 +39,7 @@
   margin-left: 20px;
   color: black;
 }
-.gallery__card_button {
+.gallery__card-button {
   background-image: url(../images/heart.svg);
   width: 21px;
   height: 18px;
@@ -48,7 +48,7 @@
   background-repeat: no-repeat;
   margin-right: 30px;
 }
-.gallery__card_button:hover{
+.gallery__card-button:hover{
     opacity: .6;
 }
 @media screen and (max-width:920px) {
