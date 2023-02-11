@@ -18,3 +18,4 @@ The image cards were set using grid.
 ![alt text](./images/demo/800px gallery.png)
 ![alt text](./images/demo/320px gallery.png)
 
+https://cjrodriguez12.github.io./se_project_aroundtheus
