@@ -1,0 +1,12 @@
+.header {
+  display: flex;
+  width: 100%;
+  border-bottom: 1px solid rgba(84, 84, 84, 0.7);
+  position: relative;
+  box-sizing: border-box;
+}
+.header__title {
+  width: 173px;
+  height: 33px;
+  margin: 45px auto 41px 0;
+}

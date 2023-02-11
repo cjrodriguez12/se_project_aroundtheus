@@ -1,0 +1,24 @@
+.page {
+  background-color: #000;
+  font-family: "Inter", Arial, sans-serif;
+  font-style: normal;
+  font-size: 18px;
+  font-weight: 400;
+  margin: 0 auto;
+  color: white;
+}
+.page__content {
+  box-sizing: border-box;
+  position: relative;
+  max-width: 882px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+}
+@media screen and (max-width: 1100px) {
+  .page__content {
+    margin: 0 20px;
+    max-width: calc(100%-40px);
+  }
+}
