@@ -5,7 +5,7 @@
 .gallery__cards {
   display: grid;
   grid-template-columns: repeat(auto-fit, 282px);
-  grid-gap: 20px 18px;
+  gap: 20px 18px;
   list-style-type: none;
   margin: 0;
   padding: 0;
@@ -23,10 +23,10 @@
 }
 .gallery__card-description {
   display: flex;
-  height: 79px;
   justify-content: space-between;
   background-color: white;
   align-items: center;
+  padding: 25px 0px 25px 20px;
 }
 .gallery__card-title {
   max-width: 220px;
@@ -38,6 +38,7 @@
   overflow: hidden;
   margin-left: 20px;
   color: black;
+  margin: 0 auto;
 }
 .gallery__card-button {
   background-image: url(../images/heart.svg);
@@ -46,14 +47,15 @@
   border-style: none;
   background-position: center;
   background-repeat: no-repeat;
+  background-color: transparent;
   margin-right: 30px;
+  cursor: pointer;
 }
-.gallery__card-button:hover{
-    opacity: .6;
+.gallery__card-button:hover {
+  opacity: 60%;
 }
-@media screen and (max-width:920px) {
-    .gallery__cards{
-        justify-content:center;
-    }
+@media screen and (max-width: 920px) {
+  .gallery__cards {
+    justify-content: center;
+  }
 }
-

@@ -1,5 +1,5 @@
 .footer {
-  font-family: "Inter";
+  font-family: "Inter", Arial, Helvetica, sans-serif;
   font-style: normal;
   font-weight: 400;
   font-size: 18px;
@@ -8,7 +8,10 @@
   color: #545454;
   padding: 49px 0 42px;
 }
-@media screen and (max-width:320px) {
+.footer__title {
+  margin-top: 0;
+}
+@media screen and (max-width: 320px) {
   .footer {
     font-size: 14px;
     line-height: 17px;

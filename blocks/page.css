@@ -16,7 +16,7 @@
   flex-direction: column;
   margin: 0 auto;
 }
-@media screen and (max-width: 1100px) {
+@media screen and (max-width: 1100px) and (min-width: 325px) {
   .page__content {
     margin: 0 20px;
     max-width: calc(100% - 40px);
