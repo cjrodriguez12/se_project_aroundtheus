@@ -38,7 +38,7 @@
   overflow: hidden;
   margin-left: 20px;
   color: black;
-  margin: 0 auto;
+  margin: 0;
 }
 .gallery__card-button {
   background-image: url(../images/heart.svg);
@@ -50,9 +50,11 @@
   background-color: transparent;
   margin-right: 30px;
   cursor: pointer;
+  transition: opacity 1s linear;
 }
 .gallery__card-button:hover {
-  opacity: 60%;
+  opacity: 50%;
+  transition: opacity 1s linear;
 }
 @media screen and (max-width: 920px) {
   .gallery__cards {
