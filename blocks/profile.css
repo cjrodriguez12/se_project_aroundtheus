@@ -111,6 +111,7 @@
     padding: 30px 10px 0 0;
     font-size: 22px;
     line-height: 27px;
+    max-width: 196px;
   }
   .profile__description {
     font-size: 14px;
@@ -120,5 +121,8 @@
     width: 18px;
     height: 18px;
     padding: 0;
+  }
+  .profile__info {
+    max-width: 282px;
   }
 }
