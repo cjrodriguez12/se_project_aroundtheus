@@ -50,10 +50,10 @@
   align-items: center;
   width: 100%;
 }
-.modal__form_label {
+.modal__form-label {
   margin-bottom: 30px;
 }
-.modal__form_fieldset {
+.modal__form-fieldset {
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -61,11 +61,11 @@
   margin: 0 0 48px;
   padding: 0;
 }
-.modal__form_input {
+.modal__form-input {
   border: none;
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
 }
-.modal__form_input::placeholder {
+.modal__form-input::placeholder {
   color: black;
   font-weight: 400;
   font-size: 14px;
@@ -73,7 +73,7 @@
   position: absolute;
   top: 0;
 }
-.modal__form_button {
+.modal__form-button {
   width: 100%;
   height: 50px;
   border: none;
@@ -102,7 +102,7 @@
     align-self: flex-end;
     background-size: 26px;
   }
-  .modal__form_button {
+  .modal__form-button {
     font-size: 14px;
     line-height: 17px;
   }
