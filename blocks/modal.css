@@ -1,12 +1,15 @@
-.modal_opened {
+.modal{
+   display: grid;
   background-color: rgba(0, 0, 0, 0.5);
   width: 100vw;
   height: 100vh;
   position: fixed;
   top: 0;
   z-index: 1;
-  display: grid;
-  display: none;
+  visibility: hidden;
+}
+.modal_opened {
+  visibility:  visible;
 }
 .modal__container {
   max-width: 470px;
