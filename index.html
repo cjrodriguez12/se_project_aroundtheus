@@ -44,72 +44,6 @@
         </section>
         <section class="gallery">
           <ul class="gallery__cards">
-            <li class="gallery__card">
-              <img
-                class="gallery__card-image"
-                src="./images/yosemite.jpg"
-                alt="yosemite"
-              />
-              <div class="gallery__card-description">
-                <h2 class="gallery__card-title">Yosemite valley</h2>
-                <button class="gallery__card-button" type="button"></button>
-              </div>
-            </li>
-            <li class="gallery__card">
-              <img
-                class="gallery__card-image"
-                src="./images/lake-louise.jpg"
-                alt="Louise"
-              />
-              <div class="gallery__card-description">
-                <h2 class="gallery__card-title">Lake Louise</h2>
-                <button class="gallery__card-button" type="button"></button>
-              </div>
-            </li>
-            <li class="gallery__card">
-              <img
-                class="gallery__card-image"
-                src="./images/bald-mountains.jpg"
-                alt="Bald"
-              />
-              <div class="gallery__card-description">
-                <h2 class="gallery__card-title">Bald Mountains</h2>
-                <button class="gallery__card-button" type="button"></button>
-              </div>
-            </li>
-            <li class="gallery__card">
-              <img
-                class="gallery__card-image"
-                src="./images/latemar.jpg"
-                alt="latemar"
-              />
-              <div class="gallery__card-description">
-                <h2 class="gallery__card-title">Latemar</h2>
-                <button class="gallery__card-button" type="button"></button>
-              </div>
-            </li>
-            <li class="gallery__card">
-              <img
-                class="gallery__card-image"
-                src="./images/vanoise.jpg"
-                alt="vanoise"
-              />
-              <div class="gallery__card-description">
-                <h2 class="gallery__card-title">Vanoise National Park</h2>
-                <button class="gallery__card-button" type="button"></button>
-              </div>
-            </li>
-            <li class="gallery__card">
-              <img
-                class="gallery__card-image"
-                src="./images/lago.jpg"
-                alt="lago"
-              />
-              <div class="gallery__card-description">
-                <h2 class="gallery__card-title">Lago di Braies</h2>
-                <button class="gallery__card-button" type="button"></button>
-              </div>
-            </li>
           </ul>
         </section>
       </main>
@@ -117,7 +51,7 @@
         <p class="footer__title">© 2022 Around The U.S.</p>
       </footer>
     </div>
-    <section class="modal  ">
+    <section class="modal" id="profile-edit-modal">
       <div class="modal__container">
         <div class="modal__box">
           <h2 class="modal__box-title">Edit profile</h2>
@@ -127,16 +61,16 @@
               <input
                 type="text"
                 class="modal__form-input"
-                id="name"
-                placeholder="Jacques Cousteau"
+                id="profile-title-input"
+                placeholder="name"
                 required
               />
               <label for="description" class="modal__form-label"></label>
               <input
                 type="text"
                 class="modal__form-input"
-                id="description"
-                placeholder="Explorer"
+                id="profile-description-input"
+                placeholder="description"
               />
             </fieldset>
             <button type="submit" class="modal__form-button">Save</button>
@@ -145,6 +79,19 @@
         <button class="modal__container-close"></button>
       </div>
     </section>
+    <template id="card-template">
+      <li class="gallery__card">
+              <img
+                class="gallery__card-image"
+                src=""
+                alt=""
+              />
+              <div class="gallery__card-description">
+                <h2 class="gallery__card-title"></h2>
+                <button class="gallery__card-button" type="button"></button>
+              </div>
+            </li>
+    </template>
     <script src="./scripts/index.js"></script>
   </body>
 </html>
