@@ -54,28 +54,28 @@
       <div class="modal__container">
         <div class="modal__box">
           <h2 class="modal__box-title">Edit profile</h2>
-          <form class="modal__form">
+          <form name="modal-form" class="modal__form">
             <fieldset class="modal__form-fieldset">
-              <label class="modal__form-label"></label>
               <input
                 type="text"
                 class="modal__form-input"
                 id="profile-title-input"
                 placeholder="name"
                 required
+                name="profile-title-input"
               />
-              <label class="modal__form-label"></label>
               <input
                 type="text"
                 class="modal__form-input"
                 id="profile-description-input"
                 placeholder="description"
+                name="profile-description-input"
               />
             </fieldset>
             <button type="submit" class="modal__form-button">Save</button>
           </form>
         </div>
-        <button class="modal__container-close"></button>
+        <button type="button" class="modal__container-close"></button>
       </div>
     </section>
     <template id="card-template">

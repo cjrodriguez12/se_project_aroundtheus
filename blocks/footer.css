@@ -9,7 +9,7 @@
   padding: 49px 0 42px;
 }
 .footer__title {
-  margin-top: 0;
+  margin: 0;
 }
 @media screen and (max-width: 320px) {
   .footer {
