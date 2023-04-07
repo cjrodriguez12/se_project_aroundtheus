@@ -38,8 +38,9 @@ const profileDescriptionInput = document.querySelector(
 
 const profileEditModal = document.querySelector("#profile-edit-modal");
 const profileEditForm = profileEditModal.querySelector(".modal__form");
-const cardTemplate = document.querySelector("#card-template").content.firstElementChild;
-const cardListEl = document.querySelector('.gallery__card');
+const cardTemplate =
+  document.querySelector("#card-template").content.firstElementChild;
+const cardListEl = document.querySelector(".gallery__cards");
 /**functions */
 function openModal() {
   modalOpened.classList.add("modal_opened");
@@ -53,11 +54,12 @@ function getCardElement(cardData) {
   //clone template
   const cardElement = cardTemplate.cloneNode(true);
   //access title and image
-  const cardImageEl = cardElement.querySelector('.gallery__card-image');
-  const cardTitleEl = cardElement.querySelector('.galery__card-title');
+  const cardImageEl = cardElement.querySelector(".gallery__card-image");
+  const cardTitleEl = cardElement.querySelector(".gallery__card-title");
   //set path to image
-  //cardImageEl.src
+  cardImageEl.src = cardData.link;
   //set alt text to name
+  cardImageEl.alt = cardData.name;
   //set title to card name
   cardTitleEl.textContent = cardData.name;
   //return ready html
@@ -78,6 +80,4 @@ profileEditForm.addEventListener("submit", handleProfileEditSubmit);
 initialCards.forEach((cardData) => {
   const cardElement = getCardElement(cardData);
   cardListEl.prepend(cardElement);
-  
 });
-  
