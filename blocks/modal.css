@@ -87,10 +87,11 @@
   color: white;
   background-color: black;
   border-radius: 2px;
+  font-size: 18px;
   line-height: 22px;
 }
 .modal__form-button:hover{
-  opacity: 0.6;
+  opacity: 0.8;
   cursor: pointer;
 }
 @media screen and (max-width: 500px) {
@@ -108,7 +109,7 @@
   .modal__box-title {
     font-size: 18px;
     line-height: 22px;
-    margin: 0 0 40px;
+    margin: 0 0 45px;
   }
   .modal__container-close {
     align-self: flex-end;
