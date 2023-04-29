@@ -78,6 +78,34 @@
         <button type="button" class="modal__container-close"></button>
       </div>
     </section>
+    <section class="modal" id="add-modal">
+      <div class="modal__container">
+        <div class="modal__box">
+          <h2 class="modal__box-title">New place</h2>
+          <form name="modal-form" class="modal__form" id="add-modal-form">
+            <fieldset class="modal__form-fieldset">
+              <input
+                type="text"
+                class="modal__form-input"
+                id="add-title-input"
+                placeholder="Title"
+                required
+                name="add-title-input"
+              />
+              <input
+                type="text"
+                class="modal__form-input"
+                id="URL-input"
+                placeholder="Image URL"
+                name="URL-input"
+              />
+            </fieldset>
+            <button type="submit" class="modal__form-button">Create</button>
+          </form>
+        </div>
+        <button type="button" class="modal__container-close"></button>
+      </div>
+    </section>
     <template id="card-template">
       <li class="gallery__card">
         <img class="gallery__card-image" src="" alt="" />
