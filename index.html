@@ -106,9 +106,21 @@
         <button type="button" class="modal__container-close"></button>
       </div>
     </section>
+    <section class="modal" id="image-modal">
+      <div class="modal__image_container">
+          <button type="button" class="modal__image_container-close"></button>
+          <div>
+          <img 
+            src=""
+            class="modal__image"
+            />
+          <h2 class="modal__box_image-title"></h2>
+        </div>
+    </section>
     <template id="card-template">
       <li class="gallery__card">
         <img class="gallery__card-image" src="" alt="" />
+        <button class="gallery__card-delete"></button>
         <div class="gallery__card-description">
           <h2 class="gallery__card-title"></h2>
           <button class="gallery__card-button" type="button"></button>

@@ -16,9 +16,11 @@
   flex-direction: column;
   border-radius: 10px;
   overflow: hidden;
+  position: relative;
 }
 .gallery__card-image {
   height: 282px;
+  
 }
 .gallery__card-description {
   display: flex;
@@ -39,6 +41,24 @@
   color: black;
   margin: 0;
 }
+.gallery__card-delete {
+  background-image: url(../images/Trash.svg);
+  width: 18px;
+  height: 19px;
+  border-style: none;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: transparent;
+  cursor: pointer;
+  transition: opacity 1s linear;
+  position: absolute;
+  top: 18px;
+  right: 15px;
+  z-index: 1;
+}
+.gallery__card-delete:hover {
+  opacity: 60%;
+}
 .gallery__card-button {
   background-image: url(../images/heart.svg);
   width: 21px;
@@ -50,11 +70,16 @@
   margin-right: 30px;
   cursor: pointer;
   transition: opacity 1s linear;
+  
+}
+.gallery__card-button_active {
+  background-image: url(../images/full-heart.svg);
 }
 .gallery__card-button:hover {
   opacity: 50%;
   transition: opacity 1s linear;
 }
+
 @media screen and (max-width: 920px) {
   .gallery__cards {
     justify-content: center;

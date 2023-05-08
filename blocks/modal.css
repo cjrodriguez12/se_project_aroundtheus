@@ -1,15 +1,18 @@
-.modal{
-   display: grid;
+.modal {
+  display: grid;
   background-color: rgba(0, 0, 0, 0.5);
   width: 100vw;
-  height: 100vh;
+  height: 0;
   position: fixed;
   top: 0;
   z-index: 1;
-  visibility: hidden;
+  opacity: 0;
+  overflow: hidden;
+  transition: opacity 1s ease-out;
 }
 .modal_opened {
-  visibility:  visible;
+  opacity: 1;
+  height: 100vh;
 }
 .modal__container {
   max-width: 430px;
@@ -37,6 +40,36 @@
   height: auto;
   margin: 0 0 24px;
 }
+.modal__image_container {
+  margin: auto;
+  display: flex;
+  flex-direction: row-reverse;
+}
+.modal__image {
+  max-width: 75vw;
+  max-height: 75vh;
+}
+.modal__box_image-title {
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 15px;
+}
+.modal__image_container-close {
+  background-image: url(../images/Close.svg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: transparent;
+  border-style: none;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  position: relative;
+  top: -40px;
+}
+.modal__image_container-close:hover {
+  cursor: pointer;
+  opacity: 0.6;
+}
 .modal__container-close {
   background-image: url(../images/Close.svg);
   background-position: center;
@@ -49,7 +82,7 @@
   top: -40px;
   right: -20px;
 }
-.modal__container-close:hover{
+.modal__container-close:hover {
   cursor: pointer;
   opacity: 0.6;
 }
@@ -71,8 +104,8 @@
   border: none;
   margin-top: 30px;
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
-  font-weight: 400; 
-  font-size: 14px; 
+  font-weight: 400;
+  font-size: 14px;
   line-height: 17px;
 }
 .modal__form-input::placeholder {
@@ -90,7 +123,7 @@
   font-size: 18px;
   line-height: 22px;
 }
-.modal__form-button:hover{
+.modal__form-button:hover {
   opacity: 0.8;
   cursor: pointer;
 }
