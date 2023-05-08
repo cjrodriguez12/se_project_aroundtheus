@@ -53,7 +53,7 @@ const cardTemplate =
 const cardListEl = document.querySelector(".gallery__cards");
 const previewImageModal=document.querySelector("#image-modal");
 /**image element */
-const previewImageModalClose = document.querySelector(".modal__image_container-close");
+const previewImageModalClose = document.querySelector(".modal__image-container-close");
 /**functions */
 
 function openModal(modal) {
@@ -83,7 +83,7 @@ function getCardElement(cardData) {
   // add click listner to image
   cardImageEl.addEventListener("click", () => {
     const modalImage = document.querySelector(".modal__image");
-    const imageTitle = document.querySelector(".modal__box_image-title");
+    const imageTitle = document.querySelector(".modal__box-image-title");
     imageTitle.textContent = cardData.name;
     modalImage.src = cardImageEl.src;
     openModal(previewImageModal)
