@@ -51,9 +51,9 @@ const addModalForm = addModal.querySelector("#add-modal-form");
 const cardTemplate =
   document.querySelector("#card-template").content.firstElementChild;
 const cardListEl = document.querySelector(".gallery__cards");
-const previewImageModal=document.querySelector("#image-modal");
+const previewImageModal = document.querySelector("#image-modal");
 /**image element */
-const previewImageModalClose = document.querySelector(".modal__image-container-close");
+const previewClose = previewImageModal.querySelector(".modal__container-close");
 /**functions */
 
 function openModal(modal) {
@@ -74,10 +74,10 @@ function getCardElement(cardData) {
   const cardTitleEl = cardElement.querySelector(".gallery__card-title");
   const likeBtn = cardElement.querySelector(".gallery__card-button");
   //find delete button
-  const deleteBtn =cardElement.querySelector(".gallery__card-delete");
+  const deleteBtn = cardElement.querySelector(".gallery__card-delete");
   // add event listener to delete
   //use .remove
-  deleteBtn.addEventListener("click", () =>{
+  deleteBtn.addEventListener("click", () => {
     cardElement.remove();
   });
   // add click listner to image
@@ -86,9 +86,11 @@ function getCardElement(cardData) {
     const imageTitle = document.querySelector(".modal__box-image-title");
     imageTitle.textContent = cardData.name;
     modalImage.src = cardImageEl.src;
-    openModal(previewImageModal)
+    previewClose.setAttribute("style", "position: relative", "right: 0");
+    previewClose.classList.add("modal__preview-close");
+    openModal(previewImageModal);
   });
-  //find image andd modify  
+  //find image andd modify
   likeBtn.addEventListener("click", () => {
     likeBtn.classList.toggle("gallery__card-button_active");
   });
@@ -115,7 +117,7 @@ function handleAddModalSubmit(e) {
   const name = addTitleInput.value;
   const link = addUrlInput.value;
   renderCard({ name, link }, cardListEl);
-  cardListEl.prepend(cardElement);
+
   closeModal(addModal);
 }
 /**form Listener */
@@ -128,10 +130,14 @@ profileEditButton.addEventListener("click", () => {
   openModal(profileEditModal);
 });
 profileClose.addEventListener("click", () => closeModal(profileEditModal));
-previewImageModalClose.addEventListener("click",() => closeModal(previewImageModal));
+previewClose.addEventListener("click", () => closeModal(previewImageModal));
 /**addButton Event Listener */
-addButton.addEventListener("click", () => openModal(addModal));
+/**addButton.addEventListener("click", () => openModal(addModal));*/
+addButton.addEventListener("click", () => {
+  addTitleInput.value = addTitleInput.placeholder;
+  addUrlInput.value = addUrlInput.placeholder;
+  openModal(addModal);
+});
 addClose.addEventListener("click", () => closeModal(addModal));
 addModalForm.addEventListener("submit", handleAddModalSubmit);
 initialCards.forEach((cardData) => renderCard(cardData, cardListEl));
-

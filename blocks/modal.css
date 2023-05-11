@@ -54,21 +54,9 @@
   font-size: 12px;
   line-height: 15px;
 }
-.modal__image-container-close {
-  background-image: url(../images/Close.svg);
-  background-position: center;
-  background-repeat: no-repeat;
-  background-color: transparent;
-  border-style: none;
-  width: 40px;
-  height: 40px;
+.modal__preview-close {
   display: flex;
-  position: relative;
-  top: -40px;
-}
-.modal__image-container-close:hover {
-  cursor: pointer;
-  opacity: 0.6;
+  left: 0;
 }
 .modal__container-close {
   background-image: url(../images/Close.svg);
@@ -81,6 +69,7 @@
   position: absolute;
   top: -40px;
   right: -20px;
+  transition: opacity 1s linear;
 }
 .modal__container-close:hover {
   cursor: pointer;
@@ -122,6 +111,7 @@
   border-radius: 2px;
   font-size: 18px;
   line-height: 22px;
+  transition: opacity 1s linear;
 }
 .modal__form-button:hover {
   opacity: 0.8;
