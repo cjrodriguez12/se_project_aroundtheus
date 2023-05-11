@@ -29,7 +29,6 @@ const initialCards = [
 const profileEditButton = document.querySelector(".profile__edit");
 const profileEditModal = document.querySelector("#profile-edit-modal");
 const profileClose = profileEditModal.querySelector(".modal__container-close");
-const modalOpened = document.querySelector(".modal");
 const profileName = document.querySelector(".profile__name");
 const profileDescription = document.querySelector(".profile__description");
 /** Profile Form elements**/
@@ -45,6 +44,8 @@ const addUrlInput = document.querySelector("#URL-input");
 const addModal = document.querySelector("#add-modal");
 const addButton = document.querySelector(".profile__add-button");
 const addClose = addModal.querySelector(".modal__container-close");
+const modalImage = document.querySelector(".modal__image");
+const imageTitle = document.querySelector(".modal__box-image-title");
 
 const addModalForm = addModal.querySelector("#add-modal-form");
 /**card elements */
@@ -82,12 +83,9 @@ function getCardElement(cardData) {
   });
   // add click listner to image
   cardImageEl.addEventListener("click", () => {
-    const modalImage = document.querySelector(".modal__image");
-    const imageTitle = document.querySelector(".modal__box-image-title");
     imageTitle.textContent = cardData.name;
     modalImage.src = cardImageEl.src;
-    previewClose.setAttribute("style", "position: relative", "right: 0");
-    previewClose.classList.add("modal__preview-close");
+
     openModal(previewImageModal);
   });
   //find image andd modify
@@ -117,7 +115,7 @@ function handleAddModalSubmit(e) {
   const name = addTitleInput.value;
   const link = addUrlInput.value;
   renderCard({ name, link }, cardListEl);
-
+  e.target.reset();
   closeModal(addModal);
 }
 /**form Listener */
@@ -132,10 +130,7 @@ profileEditButton.addEventListener("click", () => {
 profileClose.addEventListener("click", () => closeModal(profileEditModal));
 previewClose.addEventListener("click", () => closeModal(previewImageModal));
 /**addButton Event Listener */
-/**addButton.addEventListener("click", () => openModal(addModal));*/
 addButton.addEventListener("click", () => {
-  addTitleInput.value = addTitleInput.placeholder;
-  addUrlInput.value = addUrlInput.placeholder;
   openModal(addModal);
 });
 addClose.addEventListener("click", () => closeModal(addModal));

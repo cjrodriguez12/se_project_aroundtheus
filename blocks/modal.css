@@ -21,7 +21,6 @@
   margin: auto;
   display: flex;
   justify-content: flex-start;
-  align-items: flex-end;
   padding: 0 19px;
 }
 .modal__box {
@@ -54,10 +53,7 @@
   font-size: 12px;
   line-height: 15px;
 }
-.modal__preview-close {
-  display: flex;
-  left: 0;
-}
+
 .modal__container-close {
   background-image: url(../images/Close.svg);
   background-position: center;
@@ -66,9 +62,8 @@
   border-style: none;
   width: 40px;
   height: 40px;
-  position: absolute;
+  position: relative;
   top: -40px;
-  right: -20px;
   transition: opacity 1s linear;
 }
 .modal__container-close:hover {
