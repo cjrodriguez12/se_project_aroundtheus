@@ -25,6 +25,7 @@ const initialCards = [
     link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/lago.jpg ",
   },
 ];
+const modalEl = document.querySelectorAll(".modal");
 /** Profile elements**/
 const profileEditButton = document.querySelector(".profile__edit");
 const profileEditModal = document.querySelector("#profile-edit-modal");
@@ -121,7 +122,27 @@ function handleAddModalSubmit(e) {
 /**form Listener */
 profileEditForm.addEventListener("submit", handleProfileEditSubmit);
 addModalForm.addEventListener("submit", handleAddModalSubmit);
-/**Event Listeners */
+/**Event Listeners */ 
+//outside click profile modal
+profileEditModal.addEventListener('mousedown', (e) => {
+  console.log(e.target);
+  if (
+    e.target.classList.contains("modal") ||
+    e.target.classList.contains("modal__container")
+  ){
+    closeModal(profileEditModal);
+  }
+});
+//esc modal close
+document.addEventListener('keydown', (e) => {
+  console.log(e.key);
+  if(
+    e.key === "Escape"
+  )
+  closeModal(profileEditModal);
+  closeModal(addModal);
+  closeModal(previewImageModal);
+});
 profileEditButton.addEventListener("click", () => {
   profileTitleInput.value = profileName.textContent;
   profileDescriptionInput.value = profileDescription.textContent;
@@ -129,10 +150,30 @@ profileEditButton.addEventListener("click", () => {
 });
 profileClose.addEventListener("click", () => closeModal(profileEditModal));
 previewClose.addEventListener("click", () => closeModal(previewImageModal));
-/**addButton Event Listener */
+/**addButton Event Listeners */
 addButton.addEventListener("click", () => {
   openModal(addModal);
 });
 addClose.addEventListener("click", () => closeModal(addModal));
 addModalForm.addEventListener("submit", handleAddModalSubmit);
+//outside click add modal
+addModal.addEventListener('mousedown', (e) => {
+  console.log(e.target);
+  if (
+    e.target.classList.contains("modal") ||
+    e.target.classList.contains("modal__container")
+  ){
+    closeModal(addModal);
+  }
+});
+//outside click Image modal
+previewImageModal.addEventListener('mousedown', (e) => {
+  console.log(e.target);
+  if (
+    e.target.classList.contains("modal") ||
+    e.target.classList.contains("modal__image-container")
+  ){
+    closeModal(previewImageModal);
+  }
+});
 initialCards.forEach((cardData) => renderCard(cardData, cardListEl));
