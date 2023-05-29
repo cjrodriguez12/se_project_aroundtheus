@@ -56,30 +56,38 @@
           <h2 class="modal__box-title">Edit profile</h2>
           <form name="modal-form" class="modal__form">
             <fieldset class="modal__form-fieldset">
-              <label class="modal__form-label"><input
-                type="text"
-                class="modal__form-input"
-                id="profile-title-input"
-                placeholder="name"
-                required
-                name="profile-title-input"
-                maxlength="40"  
-                minlength="2"
-              />
-              <span class="modal__form-error" id="profile-title-input-error"></span></label>
-              <label class="modal__form-label"><input
-                type="text"
-                class="modal__form-input"
-                id="profile-description-input"
-                placeholder="description"
-                required
-                name="profile-description-input"
-                maxlength="200"  
-                minlength="2"
-              />
-              <span class="modal__form-error" id="profile-description-input-error"></span></label>
+              <label class="modal__form-label"
+                ><input
+                  type="text"
+                  class="modal__form-input"
+                  id="profile-title-input"
+                  placeholder="name"
+                  required
+                  name="profile-title-input"
+                  maxlength="40"
+                  minlength="2" />
+                <span
+                  class="modal__form-error"
+                  id="profile-title-input-error"
+                ></span
+              ></label>
+              <label class="modal__form-label"
+                ><input
+                  type="text"
+                  class="modal__form-input"
+                  id="profile-description-input"
+                  placeholder="description"
+                  required
+                  name="profile-description-input"
+                  maxlength="200"
+                  minlength="2" />
+                <span
+                  class="modal__form-error"
+                  id="profile-description-input-error"
+                ></span
+              ></label>
             </fieldset>
-            <button  type="submit" class="modal__form-button">Save</button>
+            <button type="submit" class="modal__form-button">Save</button>
           </form>
         </div>
         <button type="button" class="modal__container-close"></button>
@@ -87,38 +95,49 @@
     </section>
     <section class="modal" id="add-modal">
       <div class="modal__container">
-        <div class="modal__box" >
+        <div class="modal__box">
           <h2 class="modal__box-title">New place</h2>
           <form name="modal-form" class="modal__form" id="add-modal-form">
             <fieldset class="modal__form-fieldset">
-              <label class="modal__form-label"><input
-                type="text"
-                class="modal__form-input"
-                id="add-title-input"
-                placeholder="Title"
-                required
-                maxlength="30"
-                minlength="1"
-                name="add-title-input"
-              />
-              <span class="modal__form-error" id="add-title-input-error"></span></label>
-              <label class="modal__form-label"><input
-                class="modal__form-input"
-                id="URL-input"
-                placeholder="Image URL"
-                required
-                type="url"
-                name="URL-input"
-              />
-              <span class="modal__form-error" id="URL-input-error"></span></label>
+              <label class="modal__form-label"
+                ><input
+                  type="text"
+                  class="modal__form-input"
+                  id="add-title-input"
+                  placeholder="Title"
+                  required
+                  maxlength="30"
+                  minlength="1"
+                  name="add-title-input" />
+                <span
+                  class="modal__form-error"
+                  id="add-title-input-error"
+                ></span
+              ></label>
+              <label class="modal__form-label"
+                ><input
+                  class="modal__form-input"
+                  id="URL-input"
+                  placeholder="Image URL"
+                  required
+                  type="url"
+                  name="URL-input" />
+                <span class="modal__form-error" id="URL-input-error"></span
+              ></label>
             </fieldset>
-            <button id="add-modal-submit" type="submit" class="modal__form-button">Create</button>
+            <button
+              id="add-modal-submit"
+              type="submit"
+              class="modal__form-button"
+            >
+              Create
+            </button>
           </form>
         </div>
         <button type="button" class="modal__container-close"></button>
       </div>
     </section>
-    <section class="modal " id="image-modal">
+    <section class="modal" id="image-modal">
       <div class="modal__container-image">
         <button type="button" class="modal__container-close"></button>
         <div>

@@ -19,11 +19,10 @@ function hideInputError(formEL, inputEL, { inputErrorClass, errorClass }) {
   errorMessageEl.textContent = " ";
   errorMessageEl.classList.remove(errorClass);
 }
-function checkInputValidity(formEL, inputEL,options) {
+function checkInputValidity(formEL, inputEL, options) {
   if (!inputEL.validity.valid) {
     showInputError(formEL, inputEL, options);
-  } else 
-  {
+  } else {
     hideInputError(formEL, inputEL, options);
   }
 }
@@ -31,16 +30,15 @@ function hasInvalidInput(inputList) {
   return !inputList.every((inputEL) => inputEL.validity.valid);
 }
 function toggleButtonState(inputELs, submitButton, { inactiveButtonClass }) {
-  submitButton.disabled= true;
+  submitButton.disabled = true;
   submitButton.classList.add(inactiveButtonClass);
   if (hasInvalidInput(inputELs)) {
     submitButton.classList.add(inactiveButtonClass);
     submitButton.disabled = true;
-  } else 
-{  
-  submitButton.classList.remove(inactiveButtonClass);
-  submitButton.disabled = false;
-}
+  } else {
+    submitButton.classList.remove(inactiveButtonClass);
+    submitButton.disabled = false;
+  }
 }
 function setEventListeners(formEL, options) {
   const { inputSelector } = options;
@@ -56,12 +54,12 @@ function setEventListeners(formEL, options) {
 }
 function enableValidation(options) {
   const formELs = [...document.querySelectorAll(options.formSelector)];
-  
+
   formELs.forEach((formEL) => {
     formEL.addEventListener("submit", (e) => {
       e.preventDefault();
     });
-        setEventListeners(formEL, options);
+    setEventListeners(formEL, options);
     //loook for inputs
     //loop for validation
     //if !valid
