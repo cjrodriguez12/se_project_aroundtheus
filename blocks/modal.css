@@ -39,7 +39,7 @@
   height: auto;
   margin: 0 0 24px;
 }
-.modal__image-container {
+.modal__container-image {
   margin: auto;
   display: flex;
   flex-direction: row-reverse;

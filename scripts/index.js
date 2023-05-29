@@ -61,13 +61,11 @@ const previewClose = previewImageModal.querySelector(".modal__container-close");
 
 function openModal(modal) {
   modal.classList.add("modal_opened");
-  document.addEventListener("keydown", (e) => {
-    console.log(e.key);
-    if (e.key === "Escape") closeModal(modal);
-  });
+  document.addEventListener("keydown", closeModalByEscape);
 }
 function closeModal(modal) {
   modal.classList.remove("modal_opened");
+  document.removeEventListener("keydown", closeModalByEscape);
 }
 function renderCard(cardData) {
   const cardElement = getCardElement(cardData);
@@ -91,7 +89,7 @@ function getCardElement(cardData) {
   cardImageEl.addEventListener("click", () => {
     imageTitle.textContent = cardData.name;
     modalImage.src = cardImageEl.src;
-    //modalImage.alt = "Photo of "${cardData.name};
+    modalImage.alt = "Photo of " + `${cardData.name}`;
 
     openModal(previewImageModal);
   });
@@ -127,37 +125,35 @@ function handleAddModalSubmit(e) {
   closeModal(addModal);
 }
 
-function closeModalOnRemoteClick(evt) {
-  // target is the element on which the event happened
-  // currentTarget is the modal
-  // if they are the same then we should close the modal
-  console.log(evt.target);
+function closeModalOnRemoteClick(evt, modal) {
   if (
-    evt.currentTarget === evt.target 
-     ||
-     evt.currentTarget.classList.contains("modal__container")
+    evt.currentTarget === evt.target ||
+    evt.target.classList.contains("modal__container") ||
+    evt.target.classList.contains("modal__container-close") ||
+    evt.target.classList.contains("modal__container-image")
   ) {
-    closeModal(evt.target);
+    closeModal(modal);
   }
 }
-profileEditModal.addEventListener("mousedown", closeModalOnRemoteClick);
-addModal.addEventListener("mousedown", closeModalOnRemoteClick);
-previewImageModal.addEventListener("mousedown", closeModalOnRemoteClick);
+function closeModalByEscape(e) {
+  if (e.key === "Escape") {
+    const openedModal = document.querySelector(".modal_opened");
+    closeModal(openedModal);
+  }
+}
+profileEditModal.addEventListener("mousedown", (evt) =>
+  closeModalOnRemoteClick(evt, profileEditModal)
+);
+addModal.addEventListener("mousedown", (evt) =>
+  closeModalOnRemoteClick(evt, addModal)
+);
+previewImageModal.addEventListener("mousedown", (evt) =>
+  closeModalOnRemoteClick(evt, previewImageModal)
+);
 /**form Listener */
 profileEditForm.addEventListener("submit", handleProfileEditSubmit);
 addModalForm.addEventListener("submit", handleAddModalSubmit);
 /**Event Listeners */
-//outside click profile modal
-//profileEditModal.addEventListener('mousedown', (e) => {
-//  if (
-//    e.target.classList.contains("modal") ||
-//e.target.classList.contains("modal__container")
-//  ){
-//closeModal(profileEditModal);
-//}
-//});
-//esc modal close
-
 profileEditButton.addEventListener("click", () => {
   profileTitleInput.value = profileName.textContent;
   profileDescriptionInput.value = profileDescription.textContent;
@@ -171,22 +167,4 @@ addButton.addEventListener("click", () => {
 });
 addClose.addEventListener("click", () => closeModal(addModal));
 addModalForm.addEventListener("submit", handleAddModalSubmit);
-//outside click add modal
-//addModal.addEventListener('mousedown', (e) => {
-//  if (
-//    e.target.classList.contains("modal") ||
-//    e.target.classList.contains("modal__container")
-//  ){
-// /   closeModal(addModal);
-//  }
-//});
-//outside click Image modal
-//previewImageModal.addEventListener('mousedown', (e) => {
-//  if (
-//    e.target.classList.contains("modal") ||
-//    e.target.classList.contains("modal__image-container")
-//  ){
-//    closeModal(previewImageModal);
-//  }
-//});
 initialCards.forEach((cardData) => renderCard(cardData, cardListEl));

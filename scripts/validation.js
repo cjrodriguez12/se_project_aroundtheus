@@ -21,26 +21,33 @@ function hideInputError(formEL, inputEL, { inputErrorClass, errorClass }) {
 }
 function checkInputValidity(formEL, inputEL,options) {
   if (!inputEL.validity.valid) {
-    return showInputError(formEL, inputEL, options);
+    showInputError(formEL, inputEL, options);
+  } else 
+  {
+    hideInputError(formEL, inputEL, options);
   }
-  hideInputError(formEL, inputEL, options);
 }
 function hasInvalidInput(inputList) {
   return !inputList.every((inputEL) => inputEL.validity.valid);
 }
 function toggleButtonState(inputELs, submitButton, { inactiveButtonClass }) {
+  submitButton.disabled= true;
+  submitButton.classList.add(inactiveButtonClass);
   if (hasInvalidInput(inputELs)) {
     submitButton.classList.add(inactiveButtonClass);
-    return (submitButton.disabled = true);
-  }
+    submitButton.disabled = true;
+  } else 
+{  
   submitButton.classList.remove(inactiveButtonClass);
   submitButton.disabled = false;
+}
 }
 function setEventListeners(formEL, options) {
   const { inputSelector } = options;
   const inputELs = [...formEL.querySelectorAll(inputSelector)];
-  const submitButton = formEL.querySelector(".modal__form-button");
+  const submitButton = formEL.querySelector(options.submitButtonSelector);
   inputELs.forEach((inputEL) => {
+    toggleButtonState(inputELs, submitButton, options);
     inputEL.addEventListener("input", (e) => {
       checkInputValidity(formEL, inputEL, options);
       toggleButtonState(inputELs, submitButton, options);
@@ -49,6 +56,7 @@ function setEventListeners(formEL, options) {
 }
 function enableValidation(options) {
   const formELs = [...document.querySelectorAll(options.formSelector)];
+  
   formELs.forEach((formEL) => {
     formEL.addEventListener("submit", (e) => {
       e.preventDefault();
