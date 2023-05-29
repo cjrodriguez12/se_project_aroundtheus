@@ -109,7 +109,7 @@
   line-height: 22px;
   transition: opacity 1s linear;
 }
-.modal__form-button:hover {
+.modal__form-button:hover:not(:disabled) {
   opacity: 0.8;
   cursor: pointer;
 }
@@ -134,6 +134,7 @@
   color: black;
   border: 1px solid black;
 }
+
 @media screen and (max-width: 500px) {
   .modal__container {
     max-width: 282px;

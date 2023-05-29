@@ -47,6 +47,7 @@ const addButton = document.querySelector(".profile__add-button");
 const addClose = addModal.querySelector(".modal__container-close");
 const modalImage = document.querySelector(".modal__image");
 const imageTitle = document.querySelector(".modal__box-image-title");
+const AddSubmitButton = addModal.querySelector("#add-modal-submit");
 
 const addModalForm = addModal.querySelector("#add-modal-form");
 /**card elements */
@@ -60,6 +61,10 @@ const previewClose = previewImageModal.querySelector(".modal__container-close");
 
 function openModal(modal) {
   modal.classList.add("modal_opened");
+  document.addEventListener("keydown", (e) => {
+    console.log(e.key);
+    if (e.key === "Escape") closeModal(modal);
+  });
 }
 function closeModal(modal) {
   modal.classList.remove("modal_opened");
@@ -86,6 +91,7 @@ function getCardElement(cardData) {
   cardImageEl.addEventListener("click", () => {
     imageTitle.textContent = cardData.name;
     modalImage.src = cardImageEl.src;
+    //modalImage.alt = "Photo of "${cardData.name};
 
     openModal(previewImageModal);
   });
@@ -117,32 +123,41 @@ function handleAddModalSubmit(e) {
   const link = addUrlInput.value;
   renderCard({ name, link }, cardListEl);
   e.target.reset();
+  toggleButtonState([addTitleInput, addUrlInput], AddSubmitButton, config);
   closeModal(addModal);
 }
+
+function closeModalOnRemoteClick(evt) {
+  // target is the element on which the event happened
+  // currentTarget is the modal
+  // if they are the same then we should close the modal
+  console.log(evt.target);
+  if (
+    evt.currentTarget === evt.target 
+     ||
+     evt.currentTarget.classList.contains("modal__container")
+  ) {
+    closeModal(evt.target);
+  }
+}
+profileEditModal.addEventListener("mousedown", closeModalOnRemoteClick);
+addModal.addEventListener("mousedown", closeModalOnRemoteClick);
+previewImageModal.addEventListener("mousedown", closeModalOnRemoteClick);
 /**form Listener */
 profileEditForm.addEventListener("submit", handleProfileEditSubmit);
 addModalForm.addEventListener("submit", handleAddModalSubmit);
-/**Event Listeners */ 
+/**Event Listeners */
 //outside click profile modal
-profileEditModal.addEventListener('mousedown', (e) => {
-  console.log(e.target);
-  if (
-    e.target.classList.contains("modal") ||
-    e.target.classList.contains("modal__container")
-  ){
-    closeModal(profileEditModal);
-  }
-});
+//profileEditModal.addEventListener('mousedown', (e) => {
+//  if (
+//    e.target.classList.contains("modal") ||
+//e.target.classList.contains("modal__container")
+//  ){
+//closeModal(profileEditModal);
+//}
+//});
 //esc modal close
-document.addEventListener('keydown', (e) => {
-  console.log(e.key);
-  if(
-    e.key === "Escape"
-  )
-  closeModal(profileEditModal);
-  closeModal(addModal);
-  closeModal(previewImageModal);
-});
+
 profileEditButton.addEventListener("click", () => {
   profileTitleInput.value = profileName.textContent;
   profileDescriptionInput.value = profileDescription.textContent;
@@ -157,23 +172,21 @@ addButton.addEventListener("click", () => {
 addClose.addEventListener("click", () => closeModal(addModal));
 addModalForm.addEventListener("submit", handleAddModalSubmit);
 //outside click add modal
-addModal.addEventListener('mousedown', (e) => {
-  console.log(e.target);
-  if (
-    e.target.classList.contains("modal") ||
-    e.target.classList.contains("modal__container")
-  ){
-    closeModal(addModal);
-  }
-});
+//addModal.addEventListener('mousedown', (e) => {
+//  if (
+//    e.target.classList.contains("modal") ||
+//    e.target.classList.contains("modal__container")
+//  ){
+// /   closeModal(addModal);
+//  }
+//});
 //outside click Image modal
-previewImageModal.addEventListener('mousedown', (e) => {
-  console.log(e.target);
-  if (
-    e.target.classList.contains("modal") ||
-    e.target.classList.contains("modal__image-container")
-  ){
-    closeModal(previewImageModal);
-  }
-});
+//previewImageModal.addEventListener('mousedown', (e) => {
+//  if (
+//    e.target.classList.contains("modal") ||
+//    e.target.classList.contains("modal__image-container")
+//  ){
+//    closeModal(previewImageModal);
+//  }
+//});
 initialCards.forEach((cardData) => renderCard(cardData, cardListEl));
