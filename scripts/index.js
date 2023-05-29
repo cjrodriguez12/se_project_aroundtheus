@@ -47,7 +47,7 @@ const addButton = document.querySelector(".profile__add-button");
 const addClose = addModal.querySelector(".modal__container-close");
 const modalImage = document.querySelector(".modal__image");
 const imageTitle = document.querySelector(".modal__box-image-title");
-const AddSubmitButton = addModal.querySelector("#add-modal-submit");
+const addSubmitButton = addModal.querySelector("#add-modal-submit");
 
 const addModalForm = addModal.querySelector("#add-modal-form");
 /**card elements */
@@ -132,7 +132,7 @@ function closeModalOnRemoteClick(evt, modal) {
     evt.target.classList.contains("modal__container-close") ||
     evt.target.classList.contains("modal__container-image")
   ) {
-    closeModal(modal);
+    closeModal(evt.currentTarget);
   }
 }
 function closeModalByEscape(e) {
