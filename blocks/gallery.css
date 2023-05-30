@@ -20,7 +20,7 @@
 }
 .gallery__card-image {
   height: 282px;
-  
+  cursor: pointer;
 }
 .gallery__card-description {
   display: flex;

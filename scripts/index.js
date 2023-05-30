@@ -121,11 +121,11 @@ function handleAddModalSubmit(e) {
   const link = addUrlInput.value;
   renderCard({ name, link }, cardListEl);
   e.target.reset();
-  toggleButtonState([addTitleInput, addUrlInput], AddSubmitButton, config);
+  toggleButtonState([addTitleInput, addUrlInput], addSubmitButton, config);
   closeModal(addModal);
 }
 
-function closeModalOnRemoteClick(evt, modal) {
+function closeModalOnRemoteClick(evt) {
   if (
     evt.currentTarget === evt.target ||
     evt.target.classList.contains("modal__container") ||
