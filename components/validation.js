@@ -58,16 +58,7 @@ function enableValidation(options) {
       e.preventDefault();
     });
     setEventListeners(formEL, options);
-    //loook for inputs
-    //loop for validation
-    //if !valid
-    // validation message
-    //add error class
-    //display error
-    //disable button
-    // if valid
-    //enable button
-    //reset error message
+
   });
 }
 enableValidation(config);
