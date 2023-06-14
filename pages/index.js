@@ -51,8 +51,8 @@ const initialCards = [
 
 
 /**card elements */
-const cardTemplate =
-  document.querySelector("#card-template").content.firstElementChild;
+// const cardTemplate =
+//   document.querySelector("#card-template").content.firstElementChild;
 const cardListEl = document.querySelector(".gallery__cards");
 //previewImageModal = document.querySelector("#image-modal");
 /**image element */
@@ -71,7 +71,7 @@ const cardListEl = document.querySelector(".gallery__cards");
 //    const cardElement = getCardElement(cardData);
 //    cardListEl.prepend(cardElement);
 //  }
-const validationSettings = {
+const Settings = {
   inputSelector: ".modal__form-input",
   submitButtonSelector: ".modal__form-button",
   inactiveButtonClass: "modal__form-button_disabled",
@@ -82,8 +82,8 @@ const profileEditModal = document.querySelector("#profile-edit-modal");
 const addModal = document.querySelector("#add-modal");
 const addModalForm = addModal.querySelector("#add-modal-form");
 const profileEditForm = profileEditModal.querySelector(".modal__form");
-const editFormValidator = new formValidator(validationSettings, profileEditForm);
-const addFormValidator = new formValidator(validationSettings, addModalForm);
+const editFormValidator = new formValidator(Settings, profileEditForm);
+const addFormValidator = new formValidator(Settings, addModalForm);
 
 // function getCardElement(cardData) {
 //   //clone template

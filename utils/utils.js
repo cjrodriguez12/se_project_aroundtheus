@@ -1,4 +1,8 @@
 /**ELEMENTS  */
+const modalImage = document.querySelector(".modal__image");
+const imageTitle = document.querySelector(".modal__box-image-title");
+
+const cardListEl = document.querySelector(".gallery__cards");
 const profileEditModal = document.querySelector("#profile-edit-modal");
 const profileClose = profileEditModal.querySelector(".modal__container-close");
 const previewImageModal = document.querySelector("#image-modal");
@@ -6,6 +10,7 @@ const addModal = document.querySelector("#add-modal");
 const addClose = addModal.querySelector(".modal__container-close");
 const previewClose = previewImageModal.querySelector(".modal__container-close");
 const addButton = document.querySelector(".profile__add-button");
+const addSubmitButton = addModal.querySelector("#add-modal-submit");
 const profileName = document.querySelector(".profile__name");
 const profileDescription = document.querySelector(".profile__description");
 const profileTitleInput = document.querySelector("#profile-title-input");
@@ -17,7 +22,7 @@ const addModalForm = addModal.querySelector("#add-modal-form");
 const addTitleInput = document.querySelector("#add-title-input");
 const addUrlInput = document.querySelector("#URL-input");
   /**OPEN/CLOSE Functions */
-function openModal(modal) {
+export function openModal(modal) {
     modal.classList.add("modal_opened");
     document.addEventListener("keydown", closeModalByEscape);
   }
@@ -48,28 +53,25 @@ function openModal(modal) {
     profileDescription.textContent = profileDescriptionInput.value;
     closeModal(profileEditModal);
   }
-  function handleAddModalSubmit(e) {
-    e.preventDefault();
-    const name = addTitleInput.value;
-    const link = addUrlInput.value;
-    renderCard({ name, link }, cardListEl);
-    e.target.reset();
-    toggleButtonState([addTitleInput, addUrlInput], addSubmitButton, config);
-    closeModal(addModal);
-  }
-  /**Event Listners */
+function handleAddModalSubmit(e) {
+  e.preventDefault();
+  const name = addTitleInput.value;
+  const link = addUrlInput.value;
+  renderCard({ name, link }, cardListEl);
+  e.target.reset();
+  toggleButtonState([addTitleInput, addUrlInput], addSubmitButton, settings);
+  closeModal(addModal);
+}
+/**Event listeners */
 profileEditModal.addEventListener("mousedown", (evt) =>
-  closeModalOnRemoteClick(evt, profileEditModal)
-);
-addModal.addEventListener("mousedown", (evt) =>
-  closeModalOnRemoteClick(evt, addModal)
-);
-previewImageModal.addEventListener("mousedown", (evt) =>
-  closeModalOnRemoteClick(evt, previewImageModal)
-);
-profileEditForm.addEventListener("submit", handleProfileEditSubmit);
-addModalForm.addEventListener("submit", handleAddModalSubmit);
-/**Event Listeners */
+closeModalOnRemoteClick(evt, profileEditModal)
+ );
+ addModal.addEventListener("mousedown", (evt) =>
+   closeModalOnRemoteClick(evt, addModal)
+ );
+ previewImageModal.addEventListener("mousedown", (evt) =>
+   closeModalOnRemoteClick(evt, previewImageModal)
+ );
 profileEditButton.addEventListener("click", () => {
   profileTitleInput.value = profileName.textContent;
   profileDescriptionInput.value = profileDescription.textContent;
