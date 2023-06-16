@@ -58,7 +58,6 @@ function enableValidation(options) {
       e.preventDefault();
     });
     setEventListeners(formEL, options);
-
   });
 }
 enableValidation(config);
