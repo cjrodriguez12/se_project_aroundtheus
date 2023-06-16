@@ -1,6 +1,7 @@
 import { openModal } from "../utils/utils.js";
 const previewImageModal = document.querySelector("#image-modal");
 const modalImage = document.querySelector(".modal__image");
+const previewImageTitle = previewImageModal.querySelector(".modal__box-image-title");
 export default class Card {
   constructor({ name, link }, cardSelector) {
     this._name = name;
@@ -40,7 +41,9 @@ export default class Card {
   _handlePreviewImage() {
     modalImage.src = this._link;
     modalImage.alt = this._name;
+    previewImageTitle.textContent = modalImage.alt;
     openModal(previewImageModal);
+    
   }
 
   getTemplate() {
