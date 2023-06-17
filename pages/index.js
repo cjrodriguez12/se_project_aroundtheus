@@ -1,5 +1,5 @@
 import Card from "../components/Card.js";
-import formValidator from "../components/FormValidator.js";
+import FormValidator from "../components/FormValidator.js";
 import {openModal, closeModal} from "../utils/utils.js";
 const initialCards = [
   {
@@ -68,9 +68,9 @@ initialCards.forEach((cardElement) => {
 });
 
 
-const editFormValidator = new formValidator(settings, profileEditForm);
+const editFormValidator = new FormValidator(settings, profileEditForm);
 editFormValidator.enableValidation();
-const addFormValidator = new formValidator(settings, addModalForm);
+const addFormValidator = new FormValidator(settings, addModalForm);
 addFormValidator.enableValidation();
 
 /**Event Handlers */
@@ -87,7 +87,7 @@ function handleAddModalSubmit(e) {
   const card = new Card({ name, link }, "#card-template");
   renderCard(card.getView());
   e.target.reset();
-  addFormValidator._toggleButtonState();
+  addFormValidator.toggleButtonState();
   closeModal(addModal);
 };
 /**Event listeners */
