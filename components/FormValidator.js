@@ -27,8 +27,8 @@ export default
       this._hideInputError(inputEL);
     }
   }
-  _hasInvalidInput(inputList) {
-    return !inputList.every((_inputSelector) => _inputSelector.validity.valid);
+  _hasInvalidInput() {
+    return !this._inputELs.every((_inputSelector) => _inputSelector.validity.valid);
   }
   _toggleButtonState() {
     if (this._hasInvalidInput(this._inputELs)) {
@@ -42,11 +42,11 @@ export default
   _setEventListeners() {
     this._inputELs = [...this._form.querySelectorAll(this._inputSelector)];
     this._submitButton = this._form.querySelector(this._submitButtonSelector);
-    this._toggleButtonState(this._inputELs, this._submitButton);
-    this._inputELs.forEach((_inputSelector) => {
-      _inputSelector.addEventListener("input", (e) => {
-        this._checkInputValidity(_inputSelector);
-        this._toggleButtonState(this._inputELs, this._submitButton);
+    this._toggleButtonState();
+    this._inputELs.forEach((inputEL) => {
+      inputEL.addEventListener("input", (e) => {
+        this._checkInputValidity(inputEL);
+        this._toggleButtonState();
       });
     });
   }
