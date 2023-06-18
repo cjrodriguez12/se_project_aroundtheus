@@ -30,7 +30,7 @@ export default
   _hasInvalidInput() {
     return !this._inputELs.every((_inputSelector) => _inputSelector.validity.valid);
   }
-  _toggleButtonState() {
+  toggleButtonState() {
     if (this._hasInvalidInput(this._inputELs)) {
       this._submitButton.classList.add(this._inactiveButtonClass);
       this._submitButton.disabled = true;
