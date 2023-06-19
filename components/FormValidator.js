@@ -42,11 +42,11 @@ export default
   _setEventListeners() {
     this._inputELs = [...this._form.querySelectorAll(this._inputSelector)];
     this._submitButton = this._form.querySelector(this._submitButtonSelector);
-    this._toggleButtonState();
+    this.toggleButtonState();
     this._inputELs.forEach((inputEL) => {
       inputEL.addEventListener("input", (e) => {
         this._checkInputValidity(inputEL);
-        this._toggleButtonState();
+        this.toggleButtonState();
       });
     });
   }
