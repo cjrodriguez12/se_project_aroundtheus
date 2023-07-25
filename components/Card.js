@@ -3,10 +3,11 @@ const previewImageModal = document.querySelector("#image-modal");
 const modalImage = document.querySelector(".modal__image");
 const previewImageTitle = previewImageModal.querySelector(".modal__box-image-title");
 export default class Card {
-  constructor({ name, link }, cardSelector) {
+  constructor({ name, link, handlePreviewImage }, cardSelector) {
     this._name = name;
     this._link = link;
     this._cardSelector = cardSelector;
+    this._handlePreviewImage = handlePreviewImage;
   }
   _setEventListeners() {
     //like btn
@@ -42,7 +43,7 @@ export default class Card {
     modalImage.src = this._link;
     modalImage.alt = this._name;
     previewImageTitle.textContent = modalImage.alt;
-    openModal(previewImageModal);
+    this.openModal();
     
   }
 

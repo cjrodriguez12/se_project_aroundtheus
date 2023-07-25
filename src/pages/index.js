@@ -1,6 +1,8 @@
-import Card from "../components/Card.js";
-import FormValidator from "../components/FormValidator.js";
-import {openModal, closeModal} from "../utils/utils.js";
+import Card from "/components/Card.js";
+import FormValidator from "/components/FormValidator.js";
+import Section from "/components/Section";
+import {openModal, closeModal} from "/utils/utils.js";
+import "../pages/index.css";
 const initialCards = [
   {
     name: "Yosemite Valley",
@@ -73,7 +75,7 @@ editFormValidator.enableValidation();
 const addFormValidator = new FormValidator(settings, addModalForm);
 addFormValidator.enableValidation();
 
-/**Event Handlers */
+/**Event Handlers
 function handleProfileEditSubmit(e) {
   e.preventDefault();
   profileName.textContent = profileTitleInput.value;
@@ -90,7 +92,7 @@ function handleAddModalSubmit(e) {
   addFormValidator.toggleButtonState();
   closeModal(addModal);
 };
-/**Event listeners */
+/**Event listeners 
 profileEditForm.addEventListener("submit", handleProfileEditSubmit);
 addModalForm.addEventListener("submit", handleAddModalSubmit);
 profileEditButton.addEventListener("click", () => {
@@ -111,7 +113,7 @@ function closeModalOnRemoteClick(evt) {
     closeModal(evt.currentTarget);
   }
 };
-/**Event listeners */
+/**Event listeners
 profileEditModal.addEventListener("mousedown", (evt) =>
   closeModalOnRemoteClick(evt, profileEditModal)
 );
@@ -124,4 +126,18 @@ previewImageModal.addEventListener("mousedown", (evt) =>
 
 profileClose.addEventListener("click", () => closeModal(profileEditModal));
 previewClose.addEventListener("click", () => closeModal(previewImageModal));
-addClose.addEventListener("click", () => closeModal(addModal));
+addClose.addEventListener("click", () => closeModal(addModal)); */
+
+const CardSection = new Section({
+  renderer: (items)=>{
+    const cardEl = new Card(items, selectors.cardTemplate);
+    CardSection.addItems(cardEl.getView());
+  },
+  selector: selectors.cardSection,
+})
+const selectors = {
+  cardSection: 'gallery__cards',
+  cardTemplate: 'card-template',
+}
+
+CardSection.renderItems(initialCards);

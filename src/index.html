@@ -11,7 +11,6 @@
     <title>Practicum Art Gallery</title>
     <meta name="author" content="Charlie Jose Rodriguez" />
     <meta name="keywords" content="HTML,CSS,FORMS,Flexbox,animations" />
-    <link rel="stylesheet" href="./pages/index.css" />
     <link rel="icon" type="image/x-icon" href="./favicon.ico" />
   </head>
   <body class="page">
@@ -19,7 +18,7 @@
       <header class="header">
         <img
           class="header__title"
-          src="./images/header__title.svg"
+          src="<%=require('./images/header__title.svg')%>"
           alt="around the us"
         />
       </header>
@@ -28,7 +27,7 @@
           <div class="profile__content">
             <img
               class="profile__avatar"
-              src="./images/jacques-cousteau.jpg"
+              src="<%=require('./images/jacques-cousteau.jpg')%>"
               alt="avatar"
             />
             <div class="profile-column">
@@ -156,7 +155,6 @@
         </div>
       </li>
     </template>
-    <script defer src="./pages/index.js" type="module"></script>
     <script src="./utils/utils.js" type="module"></script>
   </body>
 </html>
