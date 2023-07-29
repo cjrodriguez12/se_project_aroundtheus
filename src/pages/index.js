@@ -64,10 +64,14 @@ const settings = {
   inputErrorClass: "modal__input_type_error",
   errorClass: "modal__error_visible",
 };
-initialCards.forEach((cardElement) => {
-  const card = new Card(cardElement, "#card-template");
+  const selectors = {
+  cardSection: 'gallery__cards',
+  cardTemplate: '#card-template',
+}
+/**initialCards.forEach((cardElement) => {
+  const card = new Card(cardElement, #card-template);
   renderCard(card.getView());
-});
+});*/
 
 
 const editFormValidator = new FormValidator(settings, profileEditForm);
@@ -128,16 +132,15 @@ profileClose.addEventListener("click", () => closeModal(profileEditModal));
 previewClose.addEventListener("click", () => closeModal(previewImageModal));
 addClose.addEventListener("click", () => closeModal(addModal)); */
 
-const CardSection = new Section({
+
+const cardSection = new Section({
+  items:initialCards,
   renderer: (items)=>{
     const cardEl = new Card(items, selectors.cardTemplate);
-    CardSection.addItems(cardEl.getView());
+    cardSection.addItems(cardEl.getView());
   },
-  selector: selectors.cardSection,
-})
-const selectors = {
-  cardSection: 'gallery__cards',
-  cardTemplate: 'card-template',
-}
-
-CardSection.renderItems(initialCards);
+  
+},
+selectors.cardSection
+);
+cardSection.renderCard(initialCards);
