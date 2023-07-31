@@ -51,10 +51,10 @@ const addTitleInput = document.querySelector("#add-title-input");
 const addUrlInput = document.querySelector("#URL-input");
 const addButton = document.querySelector(".profile__add-button");
 /* * functions    */
-const renderCard = (card) => {
-  const cardListEl = document.querySelector(".gallery__cards");
+const renderCard = (cardData) => {
+  const card = new Card(cardData, selectors.cardTemplate);
 
-  cardListEl.prepend(card);
+  return card.getView();
 };
 
 const settings = {
@@ -64,10 +64,7 @@ const settings = {
   inputErrorClass: "modal__input_type_error",
   errorClass: "modal__error_visible",
 };
-  const selectors = {
-  cardSection: 'gallery__cards',
-  cardTemplate: '#card-template',
-}
+  
 /**initialCards.forEach((cardElement) => {
   const card = new Card(cardElement, #card-template);
   renderCard(card.getView());
@@ -131,16 +128,19 @@ previewImageModal.addEventListener("mousedown", (evt) =>
 profileClose.addEventListener("click", () => closeModal(profileEditModal));
 previewClose.addEventListener("click", () => closeModal(previewImageModal));
 addClose.addEventListener("click", () => closeModal(addModal)); */
-
+const selectors = {
+  cardSection: '.gallery__cards',
+  cardTemplate: '#card-template',
+}
 
 const cardSection = new Section({
   items:initialCards,
   renderer: (items)=>{
-    const cardEl = new Card(items, selectors.cardTemplate);
-    cardSection.addItems(cardEl.getView());
+    const cardEl = new Card(renderCard(items));
+    cardSection.addItems(cardEl);
   },
   
 },
 selectors.cardSection
 );
-cardSection.renderCard(initialCards);
+cardSection.renderItems(initialCards);
