@@ -1,13 +1,11 @@
 import { Popup } from "./Popup.js";
-const previewImageModal = document.querySelector("#image-modal");
-const modalImage = document.querySelector(".modal__image");
-const previewImageTitle = previewImageModal.querySelector(".modal__box-image-title");
-export default class Card  {
-  constructor({ name, link}, cardSelector) {
+import { PopupWithImage } from "./PopupWithImage.js";
+export default class Card extends Popup {
+  constructor({ name, link}, cardSelector, handleCardclick) {
     this._name = name;
     this._link = link;
     this._cardSelector = cardSelector;
-    /**this._handlePreviewImage = handlePreviewImage;*/
+    this._handleCardclick = handleCardclick;
   }
   _setEventListeners() {
     //like btn 
@@ -25,7 +23,8 @@ export default class Card  {
     this._cardElement
       .querySelector(".gallery__card-image")
       .addEventListener("click", () => {
-        this._handlePreviewImage();
+        const imagePopUp = new PopupWithImage(this._cardElement);
+        imagePopUp._handleCardClick();
       });
   }
 

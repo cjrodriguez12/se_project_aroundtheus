@@ -72,15 +72,19 @@ addFormValidator.enableValidation();
 const selectors = {
   cardSection: '.gallery__cards',
   cardTemplate: '#card-template',
-  popUpSelector: '.modal'
+  popUpSelector: '.modal',
+  profileSelector: '#profile-edit-modal',
+  addSelector: '#add-modal'
+
 }
-//const buttons = {
- // profileEditButton:".profile__edit",
-//}
-const newCardPopup = new Popup(selectors.popUpSelector);
 profileEditButton.addEventListener('click',()=>{
-  return newCardPopup.openModal(profileEditModal);
-}); 
+  const newCardPopup = new Popup(selectors.profileSelector);
+  return newCardPopup.openModal();
+});
+addButton.addEventListener('click',()=>{
+  const newCardPopup = new Popup(selectors.addSelector);
+  return newCardPopup.openModal();
+}) 
 const cardSection = new Section({
   items:initialCards,
   renderer: (items)=>
