@@ -27,6 +27,5 @@ export class PopupWithForm extends Popup {
     }
     
 }
-const newCardPopup = new PopupWithForm('.modal', this._handleModalSubmit);
-newCardPopup.openModal();
-newCardPopup.closeModal();    
+
+  

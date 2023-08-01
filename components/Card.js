@@ -1,8 +1,8 @@
-import { openModal } from "../utils/utils.js";
+import { Popup } from "./Popup.js";
 const previewImageModal = document.querySelector("#image-modal");
 const modalImage = document.querySelector(".modal__image");
 const previewImageTitle = previewImageModal.querySelector(".modal__box-image-title");
-export default class Card {
+export default class Card  {
   constructor({ name, link}, cardSelector) {
     this._name = name;
     this._link = link;
@@ -38,13 +38,6 @@ export default class Card {
   _handleDelete() {
     this._cardElement.remove();
     this._cardElement = null;
-  }
-  _handlePreviewImage() {
-    modalImage.src = this._link;
-    modalImage.alt = this._name;
-    previewImageTitle.textContent = modalImage.alt;
-    this.openModal();
-    
   }
 
   getTemplate() {

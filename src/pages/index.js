@@ -1,8 +1,8 @@
 import Card from "/components/Card.js";
 import FormValidator from "/components/FormValidator.js";
 import Section from "/components/Section";
-import {openModal, closeModal} from "/utils/utils.js";
 import "../pages/index.css";
+import { Popup } from "../../components/Popup";
 const initialCards = [
   {
     name: "Yosemite Valley",
@@ -64,17 +64,40 @@ const settings = {
   inputErrorClass: "modal__input_type_error",
   errorClass: "modal__error_visible",
 };
+const editFormValidator = new FormValidator(settings, profileEditForm);
+editFormValidator.enableValidation();
+const addFormValidator = new FormValidator(settings, addModalForm);
+addFormValidator.enableValidation();
+
+const selectors = {
+  cardSection: '.gallery__cards',
+  cardTemplate: '#card-template',
+  popUpSelector: '.modal'
+}
+//const buttons = {
+ // profileEditButton:".profile__edit",
+//}
+const newCardPopup = new Popup(selectors.popUpSelector);
+profileEditButton.addEventListener('click',()=>{
+  return newCardPopup.openModal(profileEditModal);
+}); 
+const cardSection = new Section({
+  items:initialCards,
+  renderer: (items)=>
+  renderCard(items),
   
+},
+selectors.cardSection
+);
+cardSection.renderItems(initialCards);
+
+
 /**initialCards.forEach((cardElement) => {
   const card = new Card(cardElement, #card-template);
   renderCard(card.getView());
 });*/
 
 
-const editFormValidator = new FormValidator(settings, profileEditForm);
-editFormValidator.enableValidation();
-const addFormValidator = new FormValidator(settings, addModalForm);
-addFormValidator.enableValidation();
 
 /**Event Handlers
 function handleProfileEditSubmit(e) {
@@ -128,19 +151,3 @@ previewImageModal.addEventListener("mousedown", (evt) =>
 profileClose.addEventListener("click", () => closeModal(profileEditModal));
 previewClose.addEventListener("click", () => closeModal(previewImageModal));
 addClose.addEventListener("click", () => closeModal(addModal)); */
-const selectors = {
-  cardSection: '.gallery__cards',
-  cardTemplate: '#card-template',
-}
-
-const cardSection = new Section({
-  items:initialCards,
-  renderer: (items)=>{
-    const cardEl = new Card(renderCard(items));
-    cardSection.addItems(cardEl);
-  },
-  
-},
-selectors.cardSection
-);
-cardSection.renderItems(initialCards);
