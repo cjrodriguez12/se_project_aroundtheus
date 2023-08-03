@@ -1,6 +1,5 @@
-import { Popup } from "./Popup.js";
-import { PopupWithImage } from "./PopupWithImage.js";
-export default class Card extends Popup {
+
+export default class Card  {
   constructor({ name, link}, cardSelector, handleCardclick) {
     this._name = name;
     this._link = link;
@@ -23,8 +22,7 @@ export default class Card extends Popup {
     this._cardElement
       .querySelector(".gallery__card-image")
       .addEventListener("click", () => {
-        const imagePopUp = new PopupWithImage(this._cardElement);
-        imagePopUp._handleCardClick();
+        //this._handleCardClick=()
       });
   }
 

@@ -52,10 +52,22 @@ const addUrlInput = document.querySelector("#URL-input");
 const addButton = document.querySelector(".profile__add-button");
 /* * functions    */
 const renderCard = (cardData) => {
-  const card = new Card(cardData, selectors.cardTemplate);
+  const card = new Card(
+    cardData, 
+    selectors.cardTemplate,
+    handleCardClick(),
+    
+    )
 
   return card.getView();
 };
+function handleCardClick() {
+  selectors.imageSelector
+    .addEventListener('click',()=>{
+      openModal(previewImageModal)
+    }
+    )
+}
 
 const settings = {
   inputSelector: ".modal__form-input",
@@ -64,6 +76,7 @@ const settings = {
   inputErrorClass: "modal__input_type_error",
   errorClass: "modal__error_visible",
 };
+//FormValidation
 const editFormValidator = new FormValidator(settings, profileEditForm);
 editFormValidator.enableValidation();
 const addFormValidator = new FormValidator(settings, addModalForm);
@@ -74,9 +87,10 @@ const selectors = {
   cardTemplate: '#card-template',
   popUpSelector: '.modal',
   profileSelector: '#profile-edit-modal',
-  addSelector: '#add-modal'
-
+  addSelector: '#add-modal',
+  imageSelector: '.gallery__card-image',
 }
+//Buttons that Open Popup with forms
 profileEditButton.addEventListener('click',()=>{
   const newCardPopup = new Popup(selectors.profileSelector);
   return newCardPopup.openModal();
@@ -84,7 +98,8 @@ profileEditButton.addEventListener('click',()=>{
 addButton.addEventListener('click',()=>{
   const newCardPopup = new Popup(selectors.addSelector);
   return newCardPopup.openModal();
-}) 
+})
+//initializes new section renders inittial cards and new ones 
 const cardSection = new Section({
   items:initialCards,
   renderer: (items)=>
