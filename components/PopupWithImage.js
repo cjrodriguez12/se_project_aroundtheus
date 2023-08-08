@@ -4,15 +4,12 @@ export class PopupWithImage extends Popup {
         super(popUpSelector);
 
     }
-    /**_handleCardClick(){
-        this.popUpImage = this._popUpElement.querySelector('modal__image');
-        this.popUpTitle = this._popUpElement.querySelector('modal__box-image-title');
-        this._openModal();
-    }*/
-    _openModal() {
-        this.popUpImage.src = inputLink;
-        this.popUpTitle.alt = inputName;
-        this.popUpTitle.textContent = inputName;
+    openModal(name,link) {        
+        this.popUpImage = this._popUpElement.querySelector('.modal__image');
+        this.popUpTitle = this._popUpElement.querySelector('.modal__box-image-title');
+        this.popUpImage.src = link;
+        this.popUpTitle.alt = name;
+        this.popUpTitle.textContent = name;
         super.openModal();
     }
 }

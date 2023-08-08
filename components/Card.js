@@ -1,10 +1,10 @@
 
 export default class Card  {
-  constructor({ name, link}, cardSelector, handleCardclick) {
+  constructor({ name, link}, cardSelector, handleCardClick) {
     this._name = name;
     this._link = link;
     this._cardSelector = cardSelector;
-    this._handleCardclick = handleCardclick;
+    this._handleCardClick = handleCardClick;
   }
   _setEventListeners() {
     //like btn 
@@ -22,7 +22,7 @@ export default class Card  {
     this._cardElement
       .querySelector(".gallery__card-image")
       .addEventListener("click", () => {
-        //this._handleCardClick=()
+        this._handleCardClick(this._name,this._link);
       });
   }
 

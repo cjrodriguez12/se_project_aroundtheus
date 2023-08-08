@@ -3,6 +3,8 @@ import FormValidator from "/components/FormValidator.js";
 import Section from "/components/Section";
 import "../pages/index.css";
 import { Popup } from "../../components/Popup";
+import { PopupWithImage } from "../../components/PopupWithImage";
+import { UserInfo } from "../../components/UserInfo";
 const initialCards = [
   {
     name: "Yosemite Valley",
@@ -55,18 +57,16 @@ const renderCard = (cardData) => {
   const card = new Card(
     cardData, 
     selectors.cardTemplate,
-    handleCardClick(),
+    handleCardClick,
     
     )
 
   return card.getView();
 };
-function handleCardClick() {
-  selectors.imageSelector
-    .addEventListener('click',()=>{
-      openModal(previewImageModal)
-    }
-    )
+const popUpImageModal = new PopupWithImage('#image-modal');
+function handleCardClick(name,link) {
+      popUpImageModal.openModal(name,link);
+
 }
 
 const settings = {
@@ -89,10 +89,21 @@ const selectors = {
   profileSelector: '#profile-edit-modal',
   addSelector: '#add-modal',
   imageSelector: '.gallery__card-image',
+  nameSelector:'.profile__name',
+  jobSelector:'.profile__description',
+  avatarSelector:'.profile__avatar',
 }
+function handleFormFill(name, description){
+    profileTitleInput.value = name;
+    profileDescriptionInput.value = description;
+};
 //Buttons that Open Popup with forms
 profileEditButton.addEventListener('click',()=>{
   const newCardPopup = new Popup(selectors.profileSelector);
+  // grab from userinfo name + description
+  const newUserInfo = new UserInfo(selectors,handleFormFill);
+  newUserInfo.getUserInfo();
+  // call queryselector on input inside form /set values
   return newCardPopup.openModal();
 });
 addButton.addEventListener('click',()=>{
