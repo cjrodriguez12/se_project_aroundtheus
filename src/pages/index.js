@@ -5,6 +5,7 @@ import "../pages/index.css";
 import { Popup } from "../../components/Popup";
 import { PopupWithImage } from "../../components/PopupWithImage";
 import { UserInfo } from "../../components/UserInfo";
+import { PopupWithForm } from "../../components/PopupWithForm";
 const initialCards = [
   {
     name: "Yosemite Valley",
@@ -93,6 +94,7 @@ const selectors = {
   jobSelector:'.profile__description',
   avatarSelector:'.profile__avatar',
 }
+// call queryselector on input inside form /set values
 function handleFormFill(name, description){
     profileTitleInput.value = name;
     profileDescriptionInput.value = description;
@@ -103,11 +105,15 @@ profileEditButton.addEventListener('click',()=>{
   // grab from userinfo name + description
   const newUserInfo = new UserInfo(selectors,handleFormFill);
   newUserInfo.getUserInfo();
-  // call queryselector on input inside form /set values
+  
+  
   return newCardPopup.openModal();
 });
 addButton.addEventListener('click',()=>{
   const newCardPopup = new Popup(selectors.addSelector);
+  //Submit Button handler
+//const newPopUpWithForm = new PopupWithForm(selectors.addSelector, handleModalSubmit)
+//newPopUpWithForm.setEventListeners();
   return newCardPopup.openModal();
 })
 //initializes new section renders inittial cards and new ones 
@@ -120,15 +126,14 @@ const cardSection = new Section({
 selectors.cardSection
 );
 cardSection.renderItems(initialCards);
+//Submit Button handler
+const newPopUpWithForm = new PopupWithForm(".modal",handleModalSubmit)
+newPopUpWithForm.setEventListeners();
+function handleModalSubmit(modalInputs){
+  console.log(modalInputs);
 
-
-/**initialCards.forEach((cardElement) => {
-  const card = new Card(cardElement, #card-template);
-  renderCard(card.getView());
-});*/
-
-
-
+   
+}
 /**Event Handlers
 function handleProfileEditSubmit(e) {
   e.preventDefault();
