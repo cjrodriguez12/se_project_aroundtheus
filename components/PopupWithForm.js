@@ -11,7 +11,7 @@ export class PopupWithForm extends Popup {
     }
     setEventListeners() {
         super.setEventListeners();
-        this._popUpForm.addEventListeners("submit", (e) => {
+        this._popUpForm.addEventListener("submit", (e) => {
             e.preventDefault();
             const modalInputs = this._getInputValues();
             this._handleModalSubmit(modalInputs);

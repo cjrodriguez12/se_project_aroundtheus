@@ -4,7 +4,6 @@ export class UserInfo {
       this._jobElement = document.querySelector(jobSelector);
       this._userAvatar = document.querySelector(avatarSelector);
       this._handleFormFill=handleFormFill;
-      console.log(this._nameElement,this._jobElement);
 
     }
     getUserInfo() {
