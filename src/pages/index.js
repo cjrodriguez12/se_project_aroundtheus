@@ -1,10 +1,11 @@
-import Card from "/components/Card.js";
-import FormValidator from "/components/FormValidator.js";
-import Section from "/components/Section";
+import Card from "../components/card.js";
+import FormValidator from "../components/formValidator.js";
+import Section from "../components/Section.js";
 import "../pages/index.css";
-import { PopupWithImage } from "../../components/PopupWithImage";
-import { UserInfo } from "../../components/UserInfo";
-import { PopupWithForm } from "../../components/PopupWithForm";
+import { PopupWithImage } from "../components/PopupWithImage.js";
+import { UserInfo } from "../components/UserInfo.js";
+import { PopupWithForm } from "../components/PopupWithForm.js";
+import { Popup } from "../components/Popup.js";
 const initialCards = [
   {
     name: "Yosemite Valley",
@@ -31,8 +32,7 @@ const initialCards = [
     name: "Lago di Braies",
     link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/lago.jpg ",
   },
-];/**elements */
-
+]; /**elements */
 
 const profileEditModal = document.querySelector("#profile-edit-modal");
 const addModal = document.querySelector("#add-modal");
@@ -48,19 +48,13 @@ const profileEditButton = document.querySelector(".profile__edit");
 const addButton = document.querySelector(".profile__add-button");
 /* * functions    */
 const renderCard = (cardData) => {
-  const card = new Card(
-    cardData, 
-    selectors.cardTemplate,
-    handleCardClick,
-    
-    )
+  const card = new Card(cardData, selectors.cardTemplate, handleCardClick);
 
   return card.getView();
 };
-const popUpImageModal = new PopupWithImage('#image-modal');
-function handleCardClick(name,link) {
-      popUpImageModal.openModal(name,link);
-
+const popUpImageModal = new PopupWithImage("#image-modal");
+function handleCardClick(name, link) {
+  popUpImageModal.openModal(name, link);
 }
 
 const settings = {
@@ -77,48 +71,52 @@ const addFormValidator = new FormValidator(settings, addModalForm);
 addFormValidator.enableValidation();
 
 const selectors = {
-  cardSection: '.gallery__cards',
-  cardTemplate: '#card-template',
-  popUpSelector: '.modal',
-  profileSelector: '#profile-edit-modal',
-  addSelector: '#add-modal',
-  imageSelector: '.gallery__card-image',
-  nameSelector:'.profile__name',
-  jobSelector:'.profile__description',
-  avatarSelector:'.profile__avatar',
-}
-// call queryselector on input inside form /set values
-function handleFormFill(name, description){
-    profileTitleInput.value = name;
-    profileDescriptionInput.value = description;
+  cardSection: ".gallery__cards",
+  cardTemplate: "#card-template",
+  popUpSelector: ".modal",
+  profileSelector: "#profile-edit-modal",
+  addSelector: "#add-modal",
+  imageSelector: ".gallery__card-image",
+  nameSelector: ".profile__name",
+  jobSelector: ".profile__description",
+  avatarSelector: ".profile__avatar",
 };
+// call queryselector on input inside form /set values
+function handleFormFill(name, description) {
+  profileTitleInput.value = name;
+  profileDescriptionInput.value = description;
+}
 //Buttons that Open Popup with forms
-profileEditButton.addEventListener('click',()=>{
+profileEditButton.addEventListener("click", () => {
   const newCardPopup = new Popup(selectors.profileSelector);
   // grab from userinfo name + description
-  const newUserInfo = new UserInfo(selectors,handleFormFill);
+  const newUserInfo = new UserInfo(selectors, handleFormFill);
   newUserInfo.getUserInfo();
 
-  
   return newCardPopup.openModal();
-}); 
- const newPopUpWithForm = new PopupWithForm(selectors.profileSelector, handleProfileEditSubmit)
+});
+const newPopUpWithForm = new PopupWithForm(
+  selectors.profileSelector,
+  handleProfileEditSubmit
+);
 newPopUpWithForm.setEventListeners();
-const addPopUpWithForm = new PopupWithForm(selectors.addSelector, handleAddModalSubmit)
+const addPopUpWithForm = new PopupWithForm(
+  selectors.addSelector,
+  handleAddModalSubmit
+);
 addPopUpWithForm.setEventListeners();
-addButton.addEventListener('click',()=>{
+addButton.addEventListener("click", () => {
   const newCardPopup = new Popup(selectors.addSelector);
 
   return newCardPopup.openModal();
-})
-//initializes new section renders inittial cards and new ones 
-const cardSection = new Section({
-  items:initialCards,
-  renderer: (items)=>
-  renderCard(items),
-  
-},
-selectors.cardSection
+});
+//initializes new section renders inittial cards and new ones
+const cardSection = new Section(
+  {
+    items: initialCards,
+    renderer: (items) => renderCard(items),
+  },
+  selectors.cardSection
 );
 cardSection.renderItems(initialCards);
 //Submit Button handler
@@ -129,13 +127,13 @@ function handleProfileEditSubmit(modalInputs) {
   newPopUpWithForm.closeModal();
 }
 function handleAddModalSubmit(modalInputs) {
-  console.log(modalInputs)
+  console.log(modalInputs);
   const name = modalInputs.place;
   const link = modalInputs.Url;
   //const card = new Card({ name, link }, "#card-template");
-  const newCard = renderCard({name,link})
+  const newCard = renderCard({ name, link });
   cardSection.addItems(newCard);
-  
+
   addPopUpWithForm.closeModal();
   addFormValidator.toggleButtonState();
-};
+}
