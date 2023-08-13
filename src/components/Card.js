@@ -1,12 +1,9 @@
-import { openModal } from "../utils/utils.js";
-const previewImageModal = document.querySelector("#image-modal");
-const modalImage = document.querySelector(".modal__image");
-const previewImageTitle = previewImageModal.querySelector(".modal__box-image-title");
 export default class Card {
-  constructor({ name, link }, cardSelector) {
+  constructor({ name, link }, cardSelector, handleCardClick) {
     this._name = name;
     this._link = link;
     this._cardSelector = cardSelector;
+    this._handleCardClick = handleCardClick;
   }
   _setEventListeners() {
     //like btn
@@ -24,7 +21,7 @@ export default class Card {
     this._cardElement
       .querySelector(".gallery__card-image")
       .addEventListener("click", () => {
-        this._handlePreviewImage();
+        this._handleCardClick(this._name, this._link);
       });
   }
 
@@ -37,13 +34,6 @@ export default class Card {
   _handleDelete() {
     this._cardElement.remove();
     this._cardElement = null;
-  }
-  _handlePreviewImage() {
-    modalImage.src = this._link;
-    modalImage.alt = this._name;
-    previewImageTitle.textContent = modalImage.alt;
-    openModal(previewImageModal);
-    
   }
 
   getTemplate() {

@@ -1,5 +1,4 @@
-export default 
- class FormValidator {
+export default class FormValidator {
   constructor(settings, formElement) {
     this._form = formElement;
     this._inputSelector = settings.inputSelector;
@@ -28,7 +27,9 @@ export default
     }
   }
   _hasInvalidInput() {
-    return !this._inputELs.every((_inputSelector) => _inputSelector.validity.valid);
+    return !this._inputELs.every(
+      (_inputSelector) => _inputSelector.validity.valid
+    );
   }
   toggleButtonState() {
     if (this._hasInvalidInput(this._inputELs)) {
@@ -57,4 +58,3 @@ export default
     this._setEventListeners();
   }
 }
-
