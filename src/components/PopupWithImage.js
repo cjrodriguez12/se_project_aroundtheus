@@ -9,7 +9,7 @@ export class PopupWithImage extends Popup {
       ".modal__box-image-title"
     );
     this.popUpImage.src = link;
-    this.popUpTitle.alt = name;
+    this.popUpImage.alt = name;
     this.popUpTitle.textContent = name;
     super.openModal();
   }

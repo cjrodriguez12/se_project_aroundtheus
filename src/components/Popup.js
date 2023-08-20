@@ -5,7 +5,6 @@ export class Popup {
   openModal() {
     this._popUpElement.classList.add("modal_opened");
     document.addEventListener("keydown", this._closeModalByEscape);
-    this.setEventListeners();
   }
   closeModal() {
     this._popUpElement.classList.remove("modal_opened");
@@ -21,19 +20,14 @@ export class Popup {
     //"." isn't required for classlist
     if (
       evt.currentTarget === evt.target ||
-      evt.target.classList.contains("modal__container") ||
-      evt.target.classList.contains("modal__container-close") ||
-      evt.target.classList.contains("modal__container-image")
+      evt.target.classList.contains("modal__container") || 
+      evt.target.classList.contains("modal__container-close") 
+      
     ) {
       this.closeModal();
     }
   };
   setEventListeners() {
-    this._popUpElement
-      .querySelector(".modal__container-close")
-      .addEventListener("click", () => {
-        this.closeModal();
-      });
     this._popUpElement.addEventListener("click", this._closeModalOnRemoteClick);
   }
 }

@@ -5,51 +5,12 @@ import "../pages/index.css";
 import { PopupWithImage } from "../components/PopupWithImage.js";
 import { UserInfo } from "../components/UserInfo.js";
 import { PopupWithForm } from "../components/PopupWithForm.js";
-import { Popup } from "../components/Popup.js";
-const initialCards = [
-  {
-    name: "Yosemite Valley",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/yosemite.jpg",
-  },
-  {
-    name: "Lake Louise",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/lake-louise.jpg",
-  },
+import   * as constants from '../utils/constants.js';
 
-  {
-    name: "Bald Mountains",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/bald-mountains.jpg",
-  },
-  {
-    name: "Latemar",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/latemar.jpg",
-  },
-  {
-    name: "Vanoise National Park",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/vanoise.jpg",
-  },
-  {
-    name: "Lago di Braies",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/lago.jpg ",
-  },
-]; /**elements */
 
-const profileEditModal = document.querySelector("#profile-edit-modal");
-const addModal = document.querySelector("#add-modal");
-const addModalForm = addModal.querySelector("#add-modal-form");
-const profileEditForm = profileEditModal.querySelector(".modal__form");
-const profileName = document.querySelector(".profile__name");
-const profileDescription = document.querySelector(".profile__description");
-const profileTitleInput = document.querySelector("#profile-title-input");
-const profileDescriptionInput = document.querySelector(
-  "#profile-description-input"
-);
-const profileEditButton = document.querySelector(".profile__edit");
-const addButton = document.querySelector(".profile__add-button");
 /* * functions    */
 const renderCard = (cardData) => {
-  const card = new Card(cardData, selectors.cardTemplate, handleCardClick);
-
+  const card = new Card(cardData, constants.selectors.cardTemplate, handleCardClick);
   return card.getView();
 };
 const popUpImageModal = new PopupWithImage("#image-modal");
@@ -57,74 +18,63 @@ function handleCardClick(name, link) {
   popUpImageModal.openModal(name, link);
 }
 
-const settings = {
-  inputSelector: ".modal__form-input",
-  submitButtonSelector: ".modal__form-button",
-  inactiveButtonClass: "modal__form-button_disabled",
-  inputErrorClass: "modal__input_type_error",
-  errorClass: "modal__error_visible",
-};
+
 //FormValidation
-const editFormValidator = new FormValidator(settings, profileEditForm);
+const editFormValidator = new FormValidator(constants.settings, constants.profileEditForm);
 editFormValidator.enableValidation();
-const addFormValidator = new FormValidator(settings, addModalForm);
+const addFormValidator = new FormValidator(constants.settings, constants.addModalForm);
 addFormValidator.enableValidation();
 
-const selectors = {
-  cardSection: ".gallery__cards",
-  cardTemplate: "#card-template",
-  popUpSelector: ".modal",
-  profileSelector: "#profile-edit-modal",
-  addSelector: "#add-modal",
-  imageSelector: ".gallery__card-image",
-  nameSelector: ".profile__name",
-  jobSelector: ".profile__description",
-  avatarSelector: ".profile__avatar",
-};
+
+
 // call queryselector on input inside form /set values
 function handleFormFill(name, description) {
-  profileTitleInput.value = name;
-  profileDescriptionInput.value = description;
+  constants.profileTitleInput.value = name;
+  constants.profileDescriptionInput.value = description;
 }
 //Buttons that Open Popup with forms
-profileEditButton.addEventListener("click", () => {
-  const newCardPopup = new Popup(selectors.profileSelector);
+constants.profileEditButton.addEventListener("click", () => {
+  
   // grab from userinfo name + description
-  const newUserInfo = new UserInfo(selectors, handleFormFill);
+    constants.profileTitleInput.value=constants.profileName.textContent;
+    constants.profileDescriptionInput.value=constants.profileDescription.textContent;
+  const newUserInfo = new UserInfo(constants.selectors,handleProfileEditSubmit);
   newUserInfo.getUserInfo();
-
-  return newCardPopup.openModal();
+  
+  return profilePopup.openModal();
 });
-const newPopUpWithForm = new PopupWithForm(
-  selectors.profileSelector,
-  handleProfileEditSubmit
+const profilePopup = new PopupWithForm(
+  constants.selectors.profileSelector,
+  handleProfileEditSubmit, handleFormFill
 );
-newPopUpWithForm.setEventListeners();
-const addPopUpWithForm = new PopupWithForm(
-  selectors.addSelector,
+profilePopup.setEventListeners();
+const cardPopUp = new PopupWithForm(
+  constants.selectors.addSelector,
   handleAddModalSubmit
 );
-addPopUpWithForm.setEventListeners();
-addButton.addEventListener("click", () => {
-  const newCardPopup = new Popup(selectors.addSelector);
-
-  return newCardPopup.openModal();
+cardPopUp.setEventListeners();
+constants.addButton.addEventListener("click", () => {
+  
+  addFormValidator.toggleButtonState();
+  return cardPopUp.openModal();
 });
 //initializes new section renders inittial cards and new ones
 const cardSection = new Section(
   {
-    items: initialCards,
-    renderer: (items) => renderCard(items),
+    items: constants.initialCards,
+    renderer: renderCard,
   },
-  selectors.cardSection
+  constants.selectors.cardSection
 );
-cardSection.renderItems(initialCards);
+cardSection.renderItems(constants.initialCards);
 //Submit Button handler
 /**Event Handlers*/
 function handleProfileEditSubmit(modalInputs) {
-  profileName.textContent = modalInputs.title;
-  profileDescription.textContent = modalInputs.description;
-  newPopUpWithForm.closeModal();
+  console.log(modalInputs);
+  constants.profileName.textContent=modalInputs.title;
+  constants.profileDescription.textContent = modalInputs.description;
+  handleFormFill(modalInputs.title,modalInputs.description)
+  profilePopup.closeModal();
 }
 function handleAddModalSubmit(modalInputs) {
   console.log(modalInputs);
@@ -134,6 +84,6 @@ function handleAddModalSubmit(modalInputs) {
   const newCard = renderCard({ name, link });
   cardSection.addItems(newCard);
 
-  addPopUpWithForm.closeModal();
-  addFormValidator.toggleButtonState();
+  cardPopUp.closeModal();
+  
 }
