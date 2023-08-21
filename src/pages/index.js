@@ -5,12 +5,15 @@ import "../pages/index.css";
 import { PopupWithImage } from "../components/PopupWithImage.js";
 import { UserInfo } from "../components/UserInfo.js";
 import { PopupWithForm } from "../components/PopupWithForm.js";
-import   * as constants from '../utils/constants.js';
-
+import * as constants from "../utils/constants.js";
 
 /* * functions    */
 const renderCard = (cardData) => {
-  const card = new Card(cardData, constants.selectors.cardTemplate, handleCardClick);
+  const card = new Card(
+    cardData,
+    constants.selectors.cardTemplate,
+    handleCardClick
+  );
   return card.getView();
 };
 const popUpImageModal = new PopupWithImage("#image-modal");
@@ -18,14 +21,17 @@ function handleCardClick(name, link) {
   popUpImageModal.openModal(name, link);
 }
 
-
 //FormValidation
-const editFormValidator = new FormValidator(constants.settings, constants.profileEditForm);
+const editFormValidator = new FormValidator(
+  constants.settings,
+  constants.profileEditForm
+);
 editFormValidator.enableValidation();
-const addFormValidator = new FormValidator(constants.settings, constants.addModalForm);
+const addFormValidator = new FormValidator(
+  constants.settings,
+  constants.addModalForm
+);
 addFormValidator.enableValidation();
-
-
 
 // call queryselector on input inside form /set values
 function handleFormFill(userInfoList) {
@@ -35,15 +41,14 @@ function handleFormFill(userInfoList) {
 //Buttons that Open Popup with forms
 const newUserInfo = new UserInfo(constants.selectors);
 constants.profileEditButton.addEventListener("click", () => {
-  
   // grab from userinfo name + descriptions
   handleFormFill(newUserInfo.getUserInfo());
-  
+
   return profilePopup.openModal();
 });
 const profilePopup = new PopupWithForm(
   constants.selectors.profileSelector,
-  handleProfileEditSubmit, handleFormFill
+  handleProfileEditSubmit
 );
 profilePopup.setEventListeners();
 const cardPopUp = new PopupWithForm(
@@ -52,7 +57,6 @@ const cardPopUp = new PopupWithForm(
 );
 cardPopUp.setEventListeners();
 constants.addButton.addEventListener("click", () => {
-  
   addFormValidator.toggleButtonState();
   return cardPopUp.openModal();
 });
@@ -68,7 +72,7 @@ cardSection.renderItems(constants.initialCards);
 //Submit Button handler
 /**Event Handlers*/
 function handleProfileEditSubmit(modalInputs) {
-  newUserInfo.setUserInfo(modalInputs.title, modalInputs.description)
+  newUserInfo.setUserInfo(modalInputs.title, modalInputs.description);
   profilePopup.closeModal();
 }
 function handleAddModalSubmit(modalInputs) {
@@ -79,5 +83,4 @@ function handleAddModalSubmit(modalInputs) {
   cardSection.addItems(newCard);
 
   cardPopUp.closeModal();
-  
 }
