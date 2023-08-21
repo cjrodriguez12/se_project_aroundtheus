@@ -1,9 +1,8 @@
 export class UserInfo {
-  constructor({ nameSelector, jobSelector }, handleProfileEditSubmit) {
+  constructor({ nameSelector, jobSelector }) {
     this._nameElement = document.querySelector(nameSelector);
     this._jobElement = document.querySelector(jobSelector);
     // this._userAvatar = document.querySelector(avatarSelector);
-    this._handleProfileEditSubmit=handleProfileEditSubmit
 
   }
   getUserInfo() {
@@ -15,6 +14,6 @@ export class UserInfo {
   setUserInfo(name, description) {
     this._nameElement.textContent = name;
     this._jobElement.textContent = description;
-    this._handleProfileEditSubmit(this._nameElement, this._jobElement);
+    
   }
 }

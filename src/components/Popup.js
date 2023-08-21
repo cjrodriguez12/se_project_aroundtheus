@@ -16,7 +16,6 @@ export class Popup {
     }
   };
   _closeModalOnRemoteClick = (evt) => {
-    console.log(evt.target);
     //"." isn't required for classlist
     if (
       evt.currentTarget === evt.target ||

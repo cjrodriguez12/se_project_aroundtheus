@@ -28,18 +28,16 @@ addFormValidator.enableValidation();
 
 
 // call queryselector on input inside form /set values
-function handleFormFill(name, description) {
-  constants.profileTitleInput.value = name;
-  constants.profileDescriptionInput.value = description;
+function handleFormFill(userInfoList) {
+  constants.profileTitleInput.value = userInfoList.name;
+  constants.profileDescriptionInput.value = userInfoList.description;
 }
 //Buttons that Open Popup with forms
+const newUserInfo = new UserInfo(constants.selectors);
 constants.profileEditButton.addEventListener("click", () => {
   
-  // grab from userinfo name + description
-    constants.profileTitleInput.value=constants.profileName.textContent;
-    constants.profileDescriptionInput.value=constants.profileDescription.textContent;
-  const newUserInfo = new UserInfo(constants.selectors,handleProfileEditSubmit);
-  newUserInfo.getUserInfo();
+  // grab from userinfo name + descriptions
+  handleFormFill(newUserInfo.getUserInfo());
   
   return profilePopup.openModal();
 });
@@ -70,14 +68,10 @@ cardSection.renderItems(constants.initialCards);
 //Submit Button handler
 /**Event Handlers*/
 function handleProfileEditSubmit(modalInputs) {
-  console.log(modalInputs);
-  constants.profileName.textContent=modalInputs.title;
-  constants.profileDescription.textContent = modalInputs.description;
-  handleFormFill(modalInputs.title,modalInputs.description)
+  newUserInfo.setUserInfo(modalInputs.title, modalInputs.description)
   profilePopup.closeModal();
 }
 function handleAddModalSubmit(modalInputs) {
-  console.log(modalInputs);
   const name = modalInputs.place;
   const link = modalInputs.Url;
   //const card = new Card({ name, link }, "#card-template");
