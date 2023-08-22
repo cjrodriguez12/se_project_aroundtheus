@@ -17,6 +17,7 @@ const renderCard = (cardData) => {
   return card.getView();
 };
 const popUpImageModal = new PopupWithImage("#image-modal");
+popUpImageModal.setEventListeners();
 function handleCardClick(name, link) {
   popUpImageModal.openModal(name, link);
 }
