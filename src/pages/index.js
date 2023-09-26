@@ -69,6 +69,7 @@ const editFormValidator = new FormValidator(settings, profileEditForm);
 editFormValidator.enableValidation();
 const addFormValidator = new FormValidator(settings, addModalForm);
 addFormValidator.enableValidation();
+<<<<<<< Updated upstream
 
 const selectors = {
   cardSection: ".gallery__cards",
@@ -81,6 +82,13 @@ const selectors = {
   jobSelector: ".profile__description",
   avatarSelector: ".profile__avatar",
 };
+=======
+const avatarFormValidator = new FormValidator(
+  constants.settings,
+  constants.avatarForm
+);
+avatarFormValidator.enableValidation();
+>>>>>>> Stashed changes
 // call queryselector on input inside form /set values
 function handleFormFill(name, description) {
   profileTitleInput.value = name;
@@ -110,6 +118,11 @@ addButton.addEventListener("click", () => {
 
   return newCardPopup.openModal();
 });
+const avatarPopUp = new PopupWithForm(
+  constants.selectors.avatarSelector,
+  handleAvatarSubmit
+);
+avatarPopUp.setEventListeners();
 //initializes new section renders inittial cards and new ones
 const cardSection = new Section(
   {
@@ -136,4 +149,8 @@ function handleAddModalSubmit(modalInputs) {
 
   addPopUpWithForm.closeModal();
   addFormValidator.toggleButtonState();
+}
+//changes avatar profile picture
+function handleAvatarSubmit(modalInputs){
+  const link = modalInputs.Url;
 }
