@@ -23,10 +23,31 @@ function handleCardClick(name, link) {
 }
 
 //FormValidation
+<<<<<<< Updated upstream
 const editFormValidator = new FormValidator(
+=======
+const editFormValidator = new FormValidator(settings, profileEditForm);
+editFormValidator.enableValidation();
+const addFormValidator = new FormValidator(settings, addModalForm);
+addFormValidator.enableValidation();
+
+const selectors = {
+  cardSection: ".gallery__cards",
+  cardTemplate: "#card-template",
+  popUpSelector: ".modal",
+  profileSelector: "#profile-edit-modal",
+  addSelector: "#add-modal",
+  imageSelector: ".gallery__card-image",
+  nameSelector: ".profile__name",
+  jobSelector: ".profile__description",
+  avatarSelector: ".profile__avatar",
+};
+const avatarFormValidator = new FormValidator(
+>>>>>>> Stashed changes
   constants.settings,
   constants.profileEditForm
 );
+<<<<<<< Updated upstream
 editFormValidator.enableValidation();
 const addFormValidator = new FormValidator(
   constants.settings,
@@ -34,6 +55,9 @@ const addFormValidator = new FormValidator(
 );
 addFormValidator.enableValidation();
 
+=======
+avatarFormValidator.enableValidation();
+>>>>>>> Stashed changes
 // call queryselector on input inside form /set values
 function handleFormFill(userInfoList) {
   constants.profileTitleInput.value = userInfoList.name;
