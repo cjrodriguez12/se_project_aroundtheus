@@ -12,7 +12,12 @@
   margin-right: 30px;
   border-radius: 50%;
 }
-
+.avatar-img{
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: transparent;
+  border: 0;
+}
 .profile__content {
   display: flex;
   align-items: center;

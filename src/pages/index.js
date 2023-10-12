@@ -23,41 +23,21 @@ function handleCardClick(name, link) {
 }
 
 //FormValidation
-<<<<<<< Updated upstream
-const editFormValidator = new FormValidator(
-=======
-const editFormValidator = new FormValidator(settings, profileEditForm);
-editFormValidator.enableValidation();
-const addFormValidator = new FormValidator(settings, addModalForm);
-addFormValidator.enableValidation();
 
-const selectors = {
-  cardSection: ".gallery__cards",
-  cardTemplate: "#card-template",
-  popUpSelector: ".modal",
-  profileSelector: "#profile-edit-modal",
-  addSelector: "#add-modal",
-  imageSelector: ".gallery__card-image",
-  nameSelector: ".profile__name",
-  jobSelector: ".profile__description",
-  avatarSelector: ".profile__avatar",
-};
-const avatarFormValidator = new FormValidator(
->>>>>>> Stashed changes
-  constants.settings,
-  constants.profileEditForm
-);
-<<<<<<< Updated upstream
+const editFormValidator = new FormValidator(
+  constants.settings, 
+  constants.profileEditForm);
 editFormValidator.enableValidation();
+const avatarFormValidator = new FormValidator(
+  constants.settings,
+  constants.avatarForm
+);
+avatarFormValidator.enableValidation();
 const addFormValidator = new FormValidator(
   constants.settings,
   constants.addModalForm
 );
 addFormValidator.enableValidation();
-
-=======
-avatarFormValidator.enableValidation();
->>>>>>> Stashed changes
 // call queryselector on input inside form /set values
 function handleFormFill(userInfoList) {
   constants.profileTitleInput.value = userInfoList.name;
@@ -85,6 +65,15 @@ constants.addButton.addEventListener("click", () => {
   addFormValidator.toggleButtonState();
   return cardPopUp.openModal();
 });
+const avatarPopUp = new PopupWithForm(
+  constants.selectors.avatarSelector,
+  handleAvatarSubmit
+);
+constants.avatarButton.addEventListener("click",()=>{
+  avatarFormValidator.toggleButtonState();
+  return avatarPopUp.openModal();
+})
+avatarPopUp.setEventListeners();
 //initializes new section renders inittial cards and new ones
 const cardSection = new Section(
   {
@@ -108,4 +97,8 @@ function handleAddModalSubmit(modalInputs) {
   cardSection.addItems(newCard);
 
   cardPopUp.closeModal();
+}
+function handleAvatarSubmit(modalInputs){
+  const link = modalInputs.Url;
+  avatarPopUp.closeModal();
 }

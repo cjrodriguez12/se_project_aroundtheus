@@ -25,11 +25,13 @@
       <main class="main">
         <section class="profile">
           <div class="profile__content">
+            <button class="avatar-img">
             <img
               class="profile__avatar"
               src="<%=require('./images/jacques-cousteau.jpg')%>"
               alt="avatar"
             />
+              </button>
             <div class="profile-column">
               <div class="profile__info">
                 <h1 class="profile__name">Jacques Cousteau</h1>
@@ -130,6 +132,35 @@
               class="modal__form-button"
             >
               Create
+            </button>
+          </form>
+        </div>
+        <button type="button" class="modal__container-close"></button>
+      </div>
+    </section>
+    <section class="modal" id="avatar-modal">
+      <div class="modal__container">
+        <div class="modal__box">
+          <h2 class="modal__box-title">Change profile picture</h2>
+          <form name="modal-form" class="modal__form" id="avatar-modal-form">
+            <fieldset class="modal__form-fieldset">
+              <label class="modal__form-label"
+                ><input
+                  class="modal__form-input"
+                  id="URL-input"
+                  placeholder="Image URL"
+                  required
+                  type="url"
+                  name="Url" />
+                <span class="modal__form-error" id="URL-input-error"></span
+              ></label>
+            </fieldset>
+            <button
+              id="avatar-modal-submit"
+              type="submit"
+              class="modal__form-button"
+            >
+              Save
             </button>
           </form>
         </div>

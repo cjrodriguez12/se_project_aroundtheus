@@ -39,6 +39,9 @@ export const initialCards = [
  );
  export const profileEditButton = document.querySelector(".profile__edit");
  export const addButton = document.querySelector(".profile__add-button");
+ export const avatarModal = document.querySelector("#avatar-modal");
+ export const avatarForm = avatarModal.querySelector("#avatar-modal-form");
+ export const avatarButton = document.querySelector(".avatar-img");
  export const settings = {
     inputSelector: ".modal__form-input",
     submitButtonSelector: ".modal__form-button",
@@ -55,5 +58,5 @@ export const initialCards = [
   imageSelector: ".gallery__card-image",
   nameSelector: ".profile__name",
   jobSelector: ".profile__description",
-  avatarSelector: ".profile__avatar",
+  avatarSelector: "#avatar-modal",
 };
