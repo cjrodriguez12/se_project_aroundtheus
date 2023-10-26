@@ -6,6 +6,7 @@ import { PopupWithImage } from "../components/PopupWithImage.js";
 import { UserInfo } from "../components/UserInfo.js";
 import { PopupWithForm } from "../components/PopupWithForm.js";
 import * as constants from "../utils/constants.js";
+import { api } from "../components/Api.js"; 
 
 /* * functions    */
 const renderCard = (cardData) => {
@@ -26,7 +27,8 @@ function handleCardClick(name, link) {
 
 const editFormValidator = new FormValidator(
   constants.settings, 
-  constants.profileEditForm);
+  constants.profileEditForm
+  );
 editFormValidator.enableValidation();
 const avatarFormValidator = new FormValidator(
   constants.settings,
@@ -82,6 +84,7 @@ const cardSection = new Section(
   },
   constants.selectors.cardSection
 );
+
 cardSection.renderItems(constants.initialCards);
 //Submit Button handler
 /**Event Handlers*/
@@ -102,3 +105,13 @@ function handleAvatarSubmit(modalInputs){
   const link = modalInputs.Url;
   avatarPopUp.closeModal();
 }
+console.log(api.loadInfo());
+
+api.getInitialCards().then(data =>{
+  
+})
+api.loadInfo().then(data => {
+  const {name, about} = data
+  newUserInfo.setUserInfo(name, about)
+})
+
