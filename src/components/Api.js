@@ -4,7 +4,7 @@ import { data } from "autoprefixer";
   constructor(options) {
     // constructor body
   }
-
+  //load cards from server
   getInitialCards() {
     return fetch("https://around-api.en.tripleten-services.com/v1/cards", {
       headers: {
@@ -20,6 +20,7 @@ import { data } from "autoprefixer";
       });
     }
     // refactor duplicate code i.e authorization and fetch
+    //load info from server
   loadInfo() {
   return fetch("https://around-api.en.tripleten-services.com/v1/users/me", {
   headers: {
@@ -32,24 +33,26 @@ import { data } from "autoprefixer";
      } 
   })
   }
+  //editing profile
 uploadInfo(modalInputs){
+  const {title, description}=modalInputs;
   fetch ("https://around-api.en.tripleten-services.com/v1/users/me",{
     method: "PATCH",
     headers: {
       authorization:"2e65c592-5cc5-4cb0-a6bf-23fa612e6f57",
-      "Content-Type": "application/json; charset=UTF-8"
+      "Content-Type": "application/json"
       
   },
     
       body: JSON.stringify({
-      name: modalInputs.name,
-      about: modalInputs.about
+      name: title,
+      about: description
   })
 })
   .then(res => {
     if(res.ok){
-      console.log(res.json());
-        return res.json();
+      
+        return res;
     }
   })
 }

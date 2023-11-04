@@ -7,6 +7,7 @@ import { UserInfo } from "../components/UserInfo.js";
 import { PopupWithForm } from "../components/PopupWithForm.js";
 import * as constants from "../utils/constants.js";
 import { api } from "../components/Api.js"; 
+import { data } from "autoprefixer";
 
 /* * functions    */
 const renderCard = (cardData) => {
@@ -89,9 +90,13 @@ cardSection.renderItems(constants.initialCards);
 //Submit Button handler
 /**Event Handlers*/
 function handleProfileEditSubmit(modalInputs) {
+  console.log('>>FRONTEND',modalInputs)
   //newUserInfo.setUserInfo(modalInputs.title, modalInputs.description);
-  api.uploadInfo(modalInputs);
-  profilePopup.closeModal();
+    api.uploadInfo(modalInputs).then(() => {
+    const {name, about} = modalInputs
+    newUserInfo.setUserInfo(name, about)
+    profilePopup.closeModal();
+  })
 }
 function handleAddModalSubmit(modalInputs) {
   const name = modalInputs.place;
@@ -115,7 +120,4 @@ api.loadInfo().then(data => {
   const {name, about} = data
   newUserInfo.setUserInfo(name, about)
 })
-api.uploadInfo().then(data => {
-  const {name, about} = data
-  newUserInfo.setUserInfo(name, about)
-})
+
