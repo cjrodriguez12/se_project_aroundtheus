@@ -89,7 +89,8 @@ cardSection.renderItems(constants.initialCards);
 //Submit Button handler
 /**Event Handlers*/
 function handleProfileEditSubmit(modalInputs) {
-  newUserInfo.setUserInfo(modalInputs.title, modalInputs.description);
+  //newUserInfo.setUserInfo(modalInputs.title, modalInputs.description);
+  api.uploadInfo(modalInputs);
   profilePopup.closeModal();
 }
 function handleAddModalSubmit(modalInputs) {
@@ -108,10 +109,13 @@ function handleAvatarSubmit(modalInputs){
 console.log(api.loadInfo());
 
 api.getInitialCards().then(data =>{
-  
+ renderCard(data);
 })
 api.loadInfo().then(data => {
   const {name, about} = data
   newUserInfo.setUserInfo(name, about)
 })
-
+api.uploadInfo().then(data => {
+  const {name, about} = data
+  newUserInfo.setUserInfo(name, about)
+})
