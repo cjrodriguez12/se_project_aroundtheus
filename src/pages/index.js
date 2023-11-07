@@ -90,29 +90,25 @@ cardSection.renderItems(constants.initialCards);
 //Submit Button handler
 /**Event Handlers*/
 function handleProfileEditSubmit(modalInputs) {
-  console.log('>>FRONTEND',modalInputs)
   //newUserInfo.setUserInfo(modalInputs.title, modalInputs.description);
-    api.uploadInfo(modalInputs).then(() => {
-    const {name, about} = modalInputs
-    newUserInfo.setUserInfo(name, about)
+    api.updateInfo(modalInputs).then(() => {
+    const {title, description} = modalInputs
+    newUserInfo.setUserInfo(title, description)
     profilePopup.closeModal();
   })
 }
 function handleAddModalSubmit(modalInputs) {
-  const name = modalInputs.place;
-  const link = modalInputs.Url;
-  //const card = new Card({ name, link }, "#card-template");
+  api.postCards(modalInputs).then(()=>{
+  const {name,link} = modalInputs;
   const newCard = renderCard({ name, link });
   cardSection.addItems(newCard);
-
   cardPopUp.closeModal();
+  })
 }
 function handleAvatarSubmit(modalInputs){
   const link = modalInputs.Url;
   avatarPopUp.closeModal();
 }
-console.log(api.loadInfo());
-
 api.getInitialCards().then(data =>{
  renderCard(data);
 })
