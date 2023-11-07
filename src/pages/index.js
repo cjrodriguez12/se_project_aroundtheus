@@ -99,8 +99,9 @@ function handleProfileEditSubmit(modalInputs) {
 }
 function handleAddModalSubmit(modalInputs) {
   api.postCards(modalInputs).then(()=>{
-  const {name,link} = modalInputs;
-  const newCard = renderCard({ name, link });
+    const name=modalInputs.place;
+    const link=modalInputs.Url
+  const newCard = renderCard({name,link} );
   cardSection.addItems(newCard);
   cardPopUp.closeModal();
   })

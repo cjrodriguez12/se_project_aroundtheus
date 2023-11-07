@@ -52,7 +52,7 @@ class Api {
     });
   }
   postCards(modalInputs) {
-    const { name, link } = modalInputs;
+    const { place, Url } = modalInputs;
     return fetch("https://around-api.en.tripleten-services.com/v1/cards", {
       method: "POST",
       headers: {
@@ -60,8 +60,8 @@ class Api {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        name: name,
-        link: link,
+        name: place,
+        link: Url
       }),
     }).then((res) => {
       if (res.ok) {
