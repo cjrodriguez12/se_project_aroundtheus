@@ -7,7 +7,8 @@ import { UserInfo } from "../components/UserInfo.js";
 import { PopupWithForm } from "../components/PopupWithForm.js";
 import * as constants from "../utils/constants.js";
 import { api } from "../components/Api.js"; 
-import { data } from "autoprefixer";
+
+
 
 /* * functions    */
 const renderCard = (cardData) => {
@@ -78,15 +79,20 @@ constants.avatarButton.addEventListener("click",()=>{
 })
 avatarPopUp.setEventListeners();
 //initializes new section renders inittial cards and new ones
-const cardSection = new Section(
-  {
-    items: constants.initialCards,
-    renderer: renderCard,
-  },
-  constants.selectors.cardSection
-);
-
-cardSection.renderItems(constants.initialCards);
+let cardSection;
+api.getInitialCards().then((data)=>{
+  cardSection = new Section(
+    {
+      items:  data
+      ,
+      renderer: renderCard,
+    },
+    constants.selectors.cardSection
+  );
+  cardSection.renderItems( );
+})
+ 
+//cardSection.renderItems(api.getInitialCards);
 //Submit Button handler
 /**Event Handlers*/
 function handleProfileEditSubmit(modalInputs) {
@@ -110,9 +116,9 @@ function handleAvatarSubmit(modalInputs){
   const link = modalInputs.Url;
   avatarPopUp.closeModal();
 }
-api.getInitialCards().then(data =>{
- renderCard(data);
-})
+ 
+  
+ 
 api.loadInfo().then(data => {
   const {name, about} = data
   newUserInfo.setUserInfo(name, about)
