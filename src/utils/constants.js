@@ -16,6 +16,7 @@
  export const avatarModal = document.querySelector("#avatar-modal");
  export const avatarForm = avatarModal.querySelector("#avatar-modal-form");
  export const avatarButton = document.querySelector(".avatar-img");
+ export const dltPopup = document.querySelector("#delete-modal");
  export const settings = {
     inputSelector: ".modal__form-input",
     submitButtonSelector: ".modal__form-button",
@@ -33,4 +34,6 @@
   nameSelector: ".profile__name",
   jobSelector: ".profile__description",
   avatarSelector: "#avatar-modal",
+  deleteSelector: "#delete-modal",
+  dltButtonSelector: ".gallery__card-delete"
 };

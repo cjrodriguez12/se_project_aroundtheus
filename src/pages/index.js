@@ -6,16 +6,17 @@ import { PopupWithImage } from "../components/PopupWithImage.js";
 import { UserInfo } from "../components/UserInfo.js";
 import { PopupWithForm } from "../components/PopupWithForm.js";
 import * as constants from "../utils/constants.js";
-import { api } from "../components/Api.js"; 
-
-
+import { api } from "../components/Api.js";
+import { Popup } from "../components/Popup.js";
 
 /* * functions    */
 const renderCard = (cardData) => {
   const card = new Card(
     cardData,
     constants.selectors.cardTemplate,
-    handleCardClick
+    constants.selectors.deleteSelector,
+    handleCardClick,
+    handlePopup
   );
   return card.getView();
 };
@@ -24,13 +25,19 @@ popUpImageModal.setEventListeners();
 function handleCardClick(name, link) {
   popUpImageModal.openModal(name, link);
 }
-
+const dltPopup = new Popup(
+  constants.selectors.deleteSelector
+  );
+dltPopup.setEventListeners();
+function handlePopup(){
+  dltPopup.openModal();
+}
 //FormValidation
 
 const editFormValidator = new FormValidator(
-  constants.settings, 
+  constants.settings,
   constants.profileEditForm
-  );
+);
 editFormValidator.enableValidation();
 const avatarFormValidator = new FormValidator(
   constants.settings,
@@ -60,6 +67,7 @@ const profilePopup = new PopupWithForm(
   handleProfileEditSubmit
 );
 profilePopup.setEventListeners();
+
 const cardPopUp = new PopupWithForm(
   constants.selectors.addSelector,
   handleAddModalSubmit
@@ -69,58 +77,57 @@ constants.addButton.addEventListener("click", () => {
   addFormValidator.toggleButtonState();
   return cardPopUp.openModal();
 });
+
 const avatarPopUp = new PopupWithForm(
   constants.selectors.avatarSelector,
   handleAvatarSubmit
 );
-constants.avatarButton.addEventListener("click",()=>{
+constants.avatarButton.addEventListener("click", () => {
   avatarFormValidator.toggleButtonState();
   return avatarPopUp.openModal();
-})
+});
 avatarPopUp.setEventListeners();
+
+
 //initializes new section renders inittial cards and new ones
 let cardSection;
-api.getInitialCards().then((data)=>{
+api.getInitialCards().then((data) => {
   cardSection = new Section(
     {
-      items:  data
-      ,
+      items: data,
       renderer: renderCard,
     },
     constants.selectors.cardSection
   );
-  cardSection.renderItems( );
-})
- 
-//cardSection.renderItems(api.getInitialCards);
+  cardSection.renderItems();
+});
+
+
 //Submit Button handler
 /**Event Handlers*/
 function handleProfileEditSubmit(modalInputs) {
   //newUserInfo.setUserInfo(modalInputs.title, modalInputs.description);
-    api.updateInfo(modalInputs).then(() => {
-    const {title, description} = modalInputs
-    newUserInfo.setUserInfo(title, description)
+  api.updateInfo(modalInputs).then(() => {
+    const { title, description } = modalInputs;
+    newUserInfo.setUserInfo(title, description);
     profilePopup.closeModal();
-  })
+  });
 }
 function handleAddModalSubmit(modalInputs) {
-  api.postCards(modalInputs).then(()=>{
-    const name=modalInputs.place;
-    const link=modalInputs.Url
-  const newCard = renderCard({name,link} );
-  cardSection.addItems(newCard);
-  cardPopUp.closeModal();
-  })
+  api.postCards(modalInputs).then(() => {
+    const name = modalInputs.place;
+    const link = modalInputs.Url;
+    const newCard = renderCard({ name, link });
+    cardSection.addItems(newCard);
+    cardPopUp.closeModal();
+  });
 }
-function handleAvatarSubmit(modalInputs){
+function handleAvatarSubmit(modalInputs) {
   const link = modalInputs.Url;
   avatarPopUp.closeModal();
 }
- 
-  
- 
-api.loadInfo().then(data => {
-  const {name, about} = data
-  newUserInfo.setUserInfo(name, about)
-})
 
+api.loadInfo().then((data) => {
+  const { name, about } = data;
+  newUserInfo.setUserInfo(name, about);
+});

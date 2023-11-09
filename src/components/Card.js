@@ -1,9 +1,17 @@
 export default class Card {
-  constructor({ name, link }, cardSelector, handleCardClick) {
+  constructor(
+    { name, link },
+    cardSelector,
+    popupSelector,
+    handleCardClick,
+    handlePopup
+  ) {
     this._name = name;
     this._link = link;
     this._cardSelector = cardSelector;
+    this._popupSelector = popupSelector;
     this._handleCardClick = handleCardClick;
+    this._handlePopup = handlePopup;
   }
   _setEventListeners() {
     //like btn
@@ -16,6 +24,7 @@ export default class Card {
     this._cardElement
       .querySelector(".gallery__card-delete")
       .addEventListener("click", () => {
+        this._handlePopup();
         this._handleDelete();
       });
     this._cardElement
@@ -32,8 +41,12 @@ export default class Card {
       .classList.toggle("gallery__card-button_active");
   }
   _handleDelete() {
-    this._cardElement.remove();
-    this._cardElement = null;
+    this._popupSelector
+      .content.querySelector(".modal__form-button")
+      .addEventListener("click", () => {
+        this._cardElement.remove();
+        this._cardElement = null;
+      });
   }
 
   getTemplate() {
