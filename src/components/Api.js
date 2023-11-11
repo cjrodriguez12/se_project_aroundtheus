@@ -1,8 +1,9 @@
 import { data } from "autoprefixer";
 
-class Api {
-  constructor(options) {
+export class Api {
+  constructor() {
     // constructor body
+    this._baseUrl = 'https://around-api.en.tripleten-services.com/v1'
   }
   //load cards from server
   getInitialCards() {
@@ -19,6 +20,9 @@ class Api {
     });
   }
   // refactor duplicate code i.e authorization and fetch
+  getCardsById(id){
+    return fetch(`${this._baseUrl}/cards/${id}`);
+  }
   //load info from server
   loadInfo() {
     return fetch("https://around-api.en.tripleten-services.com/v1/users/me", {
@@ -69,12 +73,18 @@ class Api {
       }
     });
   }
+  deleteCards(id){
+    /// grab id from card-send id to this api call-delete card from html 
+     return fetch(`${this._baseUrl}/cards/${id}`, {
+      method: "DELETE",
+      headers: {
+        authorization: "2e65c592-5cc5-4cb0-a6bf-23fa612e6f57",
+      },
+    }).then((res) => {
+      if (res.ok) {
+        return res.json();
+      }
+    }); 
+  }
 }
 
-export const api = new Api({
-  baseUrl: "https://around-api.en.tripleten-services.com/v1",
-  headers: {
-    authorization: "2e65c592-5cc5-4cb0-a6bf-23fa612e6f57",
-    "Content-Type": "application/json",
-  },
-});

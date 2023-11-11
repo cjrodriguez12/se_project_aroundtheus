@@ -17,6 +17,9 @@ export class PopupWithForm extends Popup {
       this._handleModalSubmit(modalInputs);
     });
   }
+  setSubmitAction(callbackfn){
+    this._handleModalSubmit = callbackfn;
+  }
   _getInputValues() {
     const modalInputs = {};
     const modalInputsList =

@@ -1,4 +1,4 @@
-import Card from "../components/card.js";
+import Card from "../components/Card.js";
 import FormValidator from "../components/formValidator.js";
 import Section from "../components/Section.js";
 import "../pages/index.css";
@@ -6,17 +6,24 @@ import { PopupWithImage } from "../components/PopupWithImage.js";
 import { UserInfo } from "../components/UserInfo.js";
 import { PopupWithForm } from "../components/PopupWithForm.js";
 import * as constants from "../utils/constants.js";
-import { api } from "../components/Api.js";
-import { Popup } from "../components/Popup.js";
+import { Api } from "../components/Api.js";
 
 /* * functions    */
+const api = new Api({
+  baseUrl: "https://around-api.en.tripleten-services.com/v1",
+  headers: {
+    authorization: "2e65c592-5cc5-4cb0-a6bf-23fa612e6f57",
+    "Content-Type": "application/json",
+  },
+});
+
 const renderCard = (cardData) => {
   const card = new Card(
     cardData,
     constants.selectors.cardTemplate,
     constants.selectors.deleteSelector,
     handleCardClick,
-    handlePopup
+    handleDelete
   );
   return card.getView();
 };
@@ -25,13 +32,24 @@ popUpImageModal.setEventListeners();
 function handleCardClick(name, link) {
   popUpImageModal.openModal(name, link);
 }
-const dltPopup = new Popup(
-  constants.selectors.deleteSelector
+const dltPopup = new PopupWithForm(
+  constants.selectors.deleteSelector,
+  
   );
 dltPopup.setEventListeners();
-function handlePopup(){
+function handleDelete(id, card){
   dltPopup.openModal();
+  dltPopup.setSubmitAction(()=>{
+          console.log(id,card);
+      console.log('form submitted');
+    api.deleteCards(id).then(() => {
+     dltPopup.closeModal();
+     card.remove();
+     card=null;
+    })
+  });
 }
+
 //FormValidation
 
 const editFormValidator = new FormValidator(
@@ -131,3 +149,4 @@ api.loadInfo().then((data) => {
   const { name, about } = data;
   newUserInfo.setUserInfo(name, about);
 });
+
