@@ -35,5 +35,6 @@
   jobSelector: ".profile__description",
   avatarSelector: "#avatar-modal",
   deleteSelector: "#delete-modal",
-  dltButtonSelector: ".gallery__card-delete"
+  dltButtonSelector: ".gallery__card-delete",
+  likeSelector: ".gallery__card-button"
 };

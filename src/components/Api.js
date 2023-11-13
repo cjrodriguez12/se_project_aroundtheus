@@ -86,5 +86,31 @@ export class Api {
       }
     }); 
   }
+  notLiked(id){
+    /// grab id from card-send id to this api toggle like
+     return fetch(`${this._baseUrl}/cards/${id}/likes`, {
+      method: "DELETE",
+      headers: {
+        authorization: "2e65c592-5cc5-4cb0-a6bf-23fa612e6f57",
+      },
+    }).then((res) => {
+      if (res.ok) {
+        return res.json();
+      }
+    }); 
+  }
+  toLike(id){
+    /// grab id from card-send id to this api call toggle like
+     return fetch(`${this._baseUrl}/cards/${id}/likes`, {
+      method: "PUT",
+      headers: {
+        authorization: "2e65c592-5cc5-4cb0-a6bf-23fa612e6f57",
+      },
+    }).then((res) => {
+      if (res.ok) {
+        return res.json();
+      }
+    }); 
+  }
 }
 

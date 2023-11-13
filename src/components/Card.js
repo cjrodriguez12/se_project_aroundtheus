@@ -4,7 +4,8 @@ export default class Card {
     cardSelector,
     popupSelector,
     handleCardClick,
-    handleDelete
+    handleDelete,
+    handleToggleLikes
   ) {
     this._name = name;
     this._link = link;
@@ -14,20 +15,22 @@ export default class Card {
     this._popupSelector = popupSelector;
     this._handleCardClick = handleCardClick;
     this._handleDelete = handleDelete;
+    this._handleToggleLikes = handleToggleLikes;
   }
   _setEventListeners() {
     //like btn
     this._cardElement
       .querySelector(".gallery__card-button")
       .addEventListener("click", () => {
-        this._handleLike();
+        this._handleToggleLikes(this._id, this._isLiked, this);
+        //this._handleLike();
       });
     //delete btn
     this._cardElement
       .querySelector(".gallery__card-delete")
       .addEventListener("click", () => {
-        this._handleDelete(this._id,this._cardElement);
-      });
+        this._handleDelete(this._id, this);
+      });//Image Popup
     this._cardElement
       .querySelector(".gallery__card-image")
       .addEventListener("click", () => {
@@ -36,10 +39,11 @@ export default class Card {
   }
 
   /**Event Handlers */
-  _handleLike() {
+  handleLike() {
     this._cardElement
       .querySelector(".gallery__card-button")
       .classList.toggle("gallery__card-button_active");
+
   }
   deleteUI() {
     this._cardElement.remove();

@@ -23,8 +23,15 @@ const renderCard = (cardData) => {
     constants.selectors.cardTemplate,
     constants.selectors.deleteSelector,
     handleCardClick,
-    handleDelete
+    handleDelete,
+    handleToggleLikes
   );
+  console.log(cardData.isLiked);
+  
+  if(cardData.isLiked===true)
+    {card.getView();
+    card.handleLike();}
+    ;
   return card.getView();
 };
 const popUpImageModal = new PopupWithImage("#image-modal");
@@ -32,6 +39,7 @@ popUpImageModal.setEventListeners();
 function handleCardClick(name, link) {
   popUpImageModal.openModal(name, link);
 }
+//Popup for deleting cards from API along with handler
 const dltPopup = new PopupWithForm(
   constants.selectors.deleteSelector,
   
@@ -40,16 +48,28 @@ dltPopup.setEventListeners();
 function handleDelete(id, card){
   dltPopup.openModal();
   dltPopup.setSubmitAction(()=>{
-          console.log(id,card);
+          console.log(id, card);
       console.log('form submitted');
     api.deleteCards(id).then(() => {
      dltPopup.closeModal();
-     card.remove();
-     card=null;
+     card.deleteUI();
     })
   });
 }
-
+//Handler for the Like button 
+function handleToggleLikes(id, isLiked, card){
+  if (isLiked === false){
+    card.handleLike();
+    isLiked = true;
+    api.toLike(id);
+    
+  } else{
+    card.handleLike();
+    isLiked = false;
+    api.notLiked(id);
+    
+  }
+}
 //FormValidation
 
 const editFormValidator = new FormValidator(
@@ -117,7 +137,7 @@ api.getInitialCards().then((data) => {
     },
     constants.selectors.cardSection
   );
-  cardSection.renderItems();
+cardSection.renderItems();
 });
 
 
