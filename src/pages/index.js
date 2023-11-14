@@ -26,12 +26,6 @@ const renderCard = (cardData) => {
     handleDelete,
     handleToggleLikes
   );
-  console.log(cardData.isLiked);
-  
-  if(cardData.isLiked===true)
-    {card.getView();
-    card.handleLike();}
-    ;
   return card.getView();
 };
 const popUpImageModal = new PopupWithImage("#image-modal");
@@ -40,34 +34,29 @@ function handleCardClick(name, link) {
   popUpImageModal.openModal(name, link);
 }
 //Popup for deleting cards from API along with handler
-const dltPopup = new PopupWithForm(
-  constants.selectors.deleteSelector,
-  
-  );
+const dltPopup = new PopupWithForm(constants.selectors.deleteSelector);
 dltPopup.setEventListeners();
-function handleDelete(id, card){
+function handleDelete(id, card) {
   dltPopup.openModal();
-  dltPopup.setSubmitAction(()=>{
-          console.log(id, card);
-      console.log('form submitted');
+  dltPopup.setSubmitAction(() => {
+    console.log(id, card);
+    console.log("form submitted");
     api.deleteCards(id).then(() => {
-     dltPopup.closeModal();
-     card.deleteUI();
-    })
+      dltPopup.closeModal();
+      card.deleteUI();
+    });
   });
 }
-//Handler for the Like button 
-function handleToggleLikes(id, isLiked, card){
-  if (isLiked === false){
+//Handler for the Like button
+function handleToggleLikes(id, isLiked, card) {
+  if (isLiked === false) {
     card.handleLike();
     isLiked = true;
     api.toLike(id);
-    
-  } else{
+  } else {
     card.handleLike();
     isLiked = false;
     api.notLiked(id);
-    
   }
 }
 //FormValidation
@@ -126,7 +115,6 @@ constants.avatarButton.addEventListener("click", () => {
 });
 avatarPopUp.setEventListeners();
 
-
 //initializes new section renders inittial cards and new ones
 let cardSection;
 api.getInitialCards().then((data) => {
@@ -137,14 +125,12 @@ api.getInitialCards().then((data) => {
     },
     constants.selectors.cardSection
   );
-cardSection.renderItems();
+  cardSection.renderItems();
 });
-
 
 //Submit Button handler
 /**Event Handlers*/
 function handleProfileEditSubmit(modalInputs) {
-  //newUserInfo.setUserInfo(modalInputs.title, modalInputs.description);
   api.updateInfo(modalInputs).then(() => {
     const { title, description } = modalInputs;
     newUserInfo.setUserInfo(title, description);
@@ -169,4 +155,3 @@ api.loadInfo().then((data) => {
   const { name, about } = data;
   newUserInfo.setUserInfo(name, about);
 });
-
