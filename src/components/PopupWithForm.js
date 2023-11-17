@@ -12,13 +12,15 @@ export class PopupWithForm extends Popup {
   setEventListeners() {
     super.setEventListeners();
     this._popUpForm.addEventListener("submit", (e) => {
-      e.preventDefault();
       const modalInputs = this._getInputValues();
-      this._handleModalSubmit(modalInputs);
+      e.preventDefault();
+      this._popUpForm.querySelector(".modal__form-button").innerText =
+        "Saving...";
+      this._handleModalSubmit(modalInputs, this._popUpForm);
     });
   }
-  setSubmitAction(callbackfn){
-    this._handleModalSubmit = callbackfn;
+  setSubmitAction(callBackfn) {
+    this._handleModalSubmit = callBackfn;
   }
   _getInputValues() {
     const modalInputs = {};

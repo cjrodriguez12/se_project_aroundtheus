@@ -18,7 +18,7 @@ export class Api {
   }
   //load cards from server
   getInitialCards() {
-    return fetch("https://around-api.en.tripleten-services.com/v1/cards", {
+    return fetch(`${this._baseUrl}/cards`, {
       headers: this._headers,
     }).then(this._handleResponse);
   }
@@ -26,16 +26,16 @@ export class Api {
   getCardsById(id) {
     return fetch(`${this._baseUrl}/cards/${id}`);
   }
-  //load info from server
+  //load user info from server
   loadInfo() {
-    return fetch("https://around-api.en.tripleten-services.com/v1/users/me", {
+    return fetch(`${this._baseUrl}/users/me`, {
       headers: this._headers,
     }).then(this._handleResponse);
   }
   //editing profile
   updateInfo(modalInputs) {
     const { title, description } = modalInputs;
-    return fetch("https://around-api.en.tripleten-services.com/v1/users/me", {
+    return fetch(`${this._baseUrl}/users/me`, {
       method: "PATCH",
       headers: this._headers,
       body: JSON.stringify({
@@ -46,9 +46,22 @@ export class Api {
       this._handleResponse(res);
     });
   }
+  updateAvatar(modalInputs) {
+    const { Url } = modalInputs;
+    return fetch(`${this._baseUrl}/users/me/avatar`, {
+      method: "PATCH",
+      headers: this._headers,
+      body: JSON.stringify({
+        avatar: Url,
+      }),
+    }).then((res) => {
+      this._handleResponse(res);
+    });
+  }
+  //Post new card to Api
   postCards(modalInputs) {
     const { place, Url } = modalInputs;
-    return fetch("https://around-api.en.tripleten-services.com/v1/cards", {
+    return fetch(`${this._baseUrl}/cards`, {
       method: "POST",
       headers: this._headers,
       body: JSON.stringify({

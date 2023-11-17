@@ -19,9 +19,8 @@ export class Popup {
     //"." isn't required for classlist
     if (
       evt.currentTarget === evt.target ||
-      evt.target.classList.contains("modal__container") || 
-      evt.target.classList.contains("modal__container-close") 
-      
+      evt.target.classList.contains("modal__container") ||
+      evt.target.classList.contains("modal__container-close")
     ) {
       this.closeModal();
     }

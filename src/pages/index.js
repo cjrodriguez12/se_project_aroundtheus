@@ -1,5 +1,5 @@
 import Card from "../components/Card.js";
-import FormValidator from "../components/formValidator.js";
+import FormValidator from "../components/FormValidator.js";
 import Section from "../components/Section.js";
 import "../pages/index.css";
 import { PopupWithImage } from "../components/PopupWithImage.js";
@@ -39,12 +39,14 @@ dltPopup.setEventListeners();
 function handleDelete(id, card) {
   dltPopup.openModal();
   dltPopup.setSubmitAction(() => {
-    console.log(id, card);
-    console.log("form submitted");
     api.deleteCards(id).then(() => {
       dltPopup.closeModal();
       card.deleteUI();
-    });
+    })
+    .finally(()=>{
+      constants.dltFormSubmit
+      .innerText = "Yes";
+    })
   });
 }
 //Handler for the Like button
@@ -60,17 +62,19 @@ function handleToggleLikes(id, isLiked, card) {
   }
 }
 //FormValidation
-
+//profile name/description  
 const editFormValidator = new FormValidator(
   constants.settings,
   constants.profileEditForm
 );
 editFormValidator.enableValidation();
+//avatar Form - link
 const avatarFormValidator = new FormValidator(
   constants.settings,
   constants.avatarForm
 );
 avatarFormValidator.enableValidation();
+//card form place/Url
 const addFormValidator = new FormValidator(
   constants.settings,
   constants.addModalForm
@@ -100,20 +104,26 @@ const cardPopUp = new PopupWithForm(
   handleAddModalSubmit
 );
 cardPopUp.setEventListeners();
+const avatarPopUp = new PopupWithForm(
+  constants.selectors.avatarSelector,
+  handleAvatarSubmit
+);
+avatarPopUp.setEventListeners();
+//Toggle Submit button State
+constants.profileEditButton.addEventListener("click",()=>{
+  editFormValidator.toggleButtonState();
+  return profilePopup.openModal();
+})
 constants.addButton.addEventListener("click", () => {
   addFormValidator.toggleButtonState();
   return cardPopUp.openModal();
 });
 
-const avatarPopUp = new PopupWithForm(
-  constants.selectors.avatarSelector,
-  handleAvatarSubmit
-);
-constants.avatarButton.addEventListener("click", () => {
+constants.profileAvatar.addEventListener("click", () => {
   avatarFormValidator.toggleButtonState();
   return avatarPopUp.openModal();
 });
-avatarPopUp.setEventListeners();
+
 
 //initializes new section renders inittial cards and new ones
 let cardSection;
@@ -130,28 +140,47 @@ api.getInitialCards().then((data) => {
 
 //Submit Button handler
 /**Event Handlers*/
-function handleProfileEditSubmit(modalInputs) {
-  api.updateInfo(modalInputs).then(() => {
-    const { title, description } = modalInputs;
-    newUserInfo.setUserInfo(title, description);
-    profilePopup.closeModal();
-  });
+function handleProfileEditSubmit(modalInputs, popUpForm) {
+  api
+    .updateInfo(modalInputs)
+    .then(() => {
+      const { title, description } = modalInputs;
+      newUserInfo.setUserInfo(title, description);
+    })
+    .finally(() => {
+      popUpForm.querySelector(".modal__form-button").innerText = "Save";
+      profilePopup.closeModal();
+    });
 }
-function handleAddModalSubmit(modalInputs) {
-  api.postCards(modalInputs).then(() => {
-    const name = modalInputs.place;
-    const link = modalInputs.Url;
-    const newCard = renderCard({ name, link });
-    cardSection.addItems(newCard);
-    cardPopUp.closeModal();
-  });
+function handleAddModalSubmit(modalInputs, popUpForm) {
+  api
+    .postCards(modalInputs)
+    .then(() => {
+      const name = modalInputs.place;
+      const link = modalInputs.Url;
+      const newCard = renderCard({ name, link });
+      cardSection.addItems(newCard);
+    })
+    .finally(() => {
+      popUpForm.querySelector(".modal__form-button").innerText = "Save";
+      cardPopUp.closeModal();
+    });
 }
-function handleAvatarSubmit(modalInputs) {
-  const link = modalInputs.Url;
-  avatarPopUp.closeModal();
+function handleAvatarSubmit(modalInputs, popUpForm) {
+  api
+    .updateAvatar(modalInputs)
+    .then(() => {
+      const link = modalInputs.Url;
+      constants.profileAvatar.src = link;
+      newUserInfo.setAvatar(link);
+    })
+    .finally(() => {
+      popUpForm.querySelector(".modal__form-button").innerText = "Save";
+      avatarPopUp.closeModal();
+    });
 }
-
 api.loadInfo().then((data) => {
-  const { name, about } = data;
+  const { name, about, avatar } = data;
   newUserInfo.setUserInfo(name, about);
+  constants.profileAvatar.src = avatar;
 });
