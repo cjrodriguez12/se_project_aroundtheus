@@ -85,14 +85,9 @@ function handleFormFill(userInfoList) {
   constants.profileTitleInput.value = userInfoList.name;
   constants.profileDescriptionInput.value = userInfoList.description;
 }
-//Buttons that Open Popup with forms
-const newUserInfo = new UserInfo(constants.selectors);
-constants.profileEditButton.addEventListener("click", () => {
-  // grab from userinfo name + descriptions
-  handleFormFill(newUserInfo.getUserInfo());
 
-  return profilePopup.openModal();
-});
+
+
 const profilePopup = new PopupWithForm(
   constants.selectors.profileSelector,
   handleProfileEditSubmit
@@ -104,23 +99,26 @@ const cardPopUp = new PopupWithForm(
   handleAddModalSubmit
 );
 cardPopUp.setEventListeners();
+
 const avatarPopUp = new PopupWithForm(
   constants.selectors.avatarSelector,
   handleAvatarSubmit
 );
 avatarPopUp.setEventListeners();
-//Toggle Submit button State
-constants.profileEditButton.addEventListener("click",()=>{
-  editFormValidator.toggleButtonState();
+//Buttons that Open Popup with forms
+// grab from userinfo name + descriptions
+const newUserInfo = new UserInfo(constants.selectors);
+constants.profileEditButton.addEventListener("click", () => {
+  handleFormFill(newUserInfo.getUserInfo());
   return profilePopup.openModal();
-})
+});
 constants.addButton.addEventListener("click", () => {
-  addFormValidator.toggleButtonState();
+  
   return cardPopUp.openModal();
 });
 
 constants.profileAvatar.addEventListener("click", () => {
-  avatarFormValidator.toggleButtonState();
+  
   return avatarPopUp.openModal();
 });
 
@@ -139,6 +137,7 @@ api.getInitialCards().then((data) => {
 });
 
 //Submit Button handler
+//Toggle Submit button State
 /**Event Handlers*/
 function handleProfileEditSubmit(modalInputs, popUpForm) {
   api
@@ -146,6 +145,7 @@ function handleProfileEditSubmit(modalInputs, popUpForm) {
     .then(() => {
       const { title, description } = modalInputs;
       newUserInfo.setUserInfo(title, description);
+      editFormValidator.toggleButtonState();
     })
     .finally(() => {
       popUpForm.querySelector(".modal__form-button").innerText = "Save";
@@ -160,6 +160,9 @@ function handleAddModalSubmit(modalInputs, popUpForm) {
       const link = modalInputs.Url;
       const newCard = renderCard({ name, link });
       cardSection.addItems(newCard);
+      popUpForm.reset();
+      addFormValidator.toggleButtonState();
+      
     })
     .finally(() => {
       popUpForm.querySelector(".modal__form-button").innerText = "Save";
@@ -173,6 +176,9 @@ function handleAvatarSubmit(modalInputs, popUpForm) {
       const link = modalInputs.Url;
       constants.profileAvatar.src = link;
       newUserInfo.setAvatar(link);
+      popUpForm.reset();
+      avatarFormValidator.toggleButtonState();
+      
     })
     .finally(() => {
       popUpForm.querySelector(".modal__form-button").innerText = "Save";

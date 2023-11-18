@@ -5,10 +5,10 @@ export class PopupWithForm extends Popup {
     this._popUpForm = this._popUpElement.querySelector(".modal__form");
     this._handleModalSubmit = handleModalSubmit;
   }
-  closeModal() {
-    this._popUpForm.reset();
-    super.closeModal();
-  }
+  // closeModal() {
+  //   this._popUpForm.reset();
+  //   super.closeModal();
+  // }
   setEventListeners() {
     super.setEventListeners();
     this._popUpForm.addEventListener("submit", (e) => {
