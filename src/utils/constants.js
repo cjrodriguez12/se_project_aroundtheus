@@ -1,8 +1,8 @@
 /**elements */
 
 export const profileEditModal = document.querySelector("#profile-edit-modal");
-export const addModal = document.querySelector("#add-modal");
-export const addModalForm = addModal.querySelector("#add-modal-form");
+export const addModal = document.querySelector("#card-modal");
+export const addModalForm = addModal.querySelector("#card-modal-form");
 export const profileEditForm = profileEditModal.querySelector(".modal__form");
 export const profileName = document.querySelector(".profile__name");
 export const profileDescription = document.querySelector(
@@ -31,7 +31,7 @@ export const selectors = {
   cardTemplate: "#card-template",
   popUpSelector: ".modal",
   profileSelector: "#profile-edit-modal",
-  addSelector: "#add-modal",
+  addSelector: "#card-modal",
   imageSelector: ".gallery__card-image",
   nameSelector: ".profile__name",
   jobSelector: ".profile__description",

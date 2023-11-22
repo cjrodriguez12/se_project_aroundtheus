@@ -7,8 +7,6 @@ import { UserInfo } from "../components/UserInfo.js";
 import { PopupWithForm } from "../components/PopupWithForm.js";
 import * as constants from "../utils/constants.js";
 import { Api } from "../components/Api.js";
-import { data } from "autoprefixer";
-
 /* * functions    */
 const api = new Api({
   baseUrl: "https://around-api.en.tripleten-services.com/v1",
@@ -17,7 +15,6 @@ const api = new Api({
     "Content-Type": "application/json",
   },
 });
-
 const renderCard = (cardData) => {
   const card = new Card(
     cardData,
@@ -46,6 +43,10 @@ function handleDelete(id, card) {
         dltPopup.closeModal();
         card.deleteUI();
       })
+      .catch((err) => {
+        console.error(err); // log the error to the console
+      })
+
       .finally(() => {
         constants.dltFormSubmit.innerText = "Yes";
       });
@@ -54,13 +55,25 @@ function handleDelete(id, card) {
 //Handler for the Like button
 function handleToggleLikes(id, isLiked, card) {
   if (isLiked === false) {
-    card.handleLike();
     isLiked = true;
-    api.toLike(id);
+    api
+      .toLike(id)
+      .then(() => {
+        card.handleLike();
+      })
+      .catch((err) => {
+        console.error(err); // log the error to the console
+      });
   } else {
-    card.handleLike();
     isLiked = false;
-    api.notLiked(id);
+    api
+      .notLiked(id)
+      .then(() => {
+        card.handleLike();
+      })
+      .catch((err) => {
+        console.error(err); // log the error to the console
+      });
   }
 }
 //FormValidation
@@ -122,16 +135,21 @@ constants.profileAvatar.addEventListener("click", () => {
 
 //initializes new section renders inittial cards and new ones
 let cardSection;
-api.getInitialCards().then((data) => {
-  cardSection = new Section(
-    {
-      items: data,
-      renderer: renderCard,
-    },
-    constants.selectors.cardSection
-  );
-  cardSection.renderItems();
-});
+api
+  .getInitialCards()
+  .then((data) => {
+    cardSection = new Section(
+      {
+        items: data,
+        renderer: renderCard,
+      },
+      constants.selectors.cardSection
+    );
+    cardSection.renderItems();
+  })
+  .catch((err) => {
+    console.error(err); // log the error to the console
+  });
 
 //Submit Button handler
 //Toggle Submit button State
@@ -143,16 +161,16 @@ function handleProfileEditSubmit(modalInputs, popUpForm) {
       const { title, description } = modalInputs;
       newUserInfo.setUserInfo(title, description);
       editFormValidator.toggleButtonState();
+      profilePopup.closeModal();
+    })
+    .catch((err) => {
+      console.error(err); // log the error to the console
     })
     .finally(() => {
       popUpForm.querySelector(".modal__form-button").innerText = "Save";
-      profilePopup.closeModal();
     });
 }
 function handleAddModalSubmit(modalInputs, popUpForm) {
-  const name = modalInputs.place;
-  const link = modalInputs.Url;
-  
   api
     .postCards(modalInputs)
     .then((res) => {
@@ -160,10 +178,13 @@ function handleAddModalSubmit(modalInputs, popUpForm) {
       cardSection.addItems(newCard);
       popUpForm.reset();
       addFormValidator.toggleButtonState();
+      cardPopUp.closeModal();
+    })
+    .catch((err) => {
+      console.error(err); // log the error to the console
     })
     .finally(() => {
       popUpForm.querySelector(".modal__form-button").innerText = "Save";
-      cardPopUp.closeModal();
     });
 }
 function handleAvatarSubmit(modalInputs, popUpForm) {
@@ -175,14 +196,21 @@ function handleAvatarSubmit(modalInputs, popUpForm) {
       newUserInfo.setAvatar(link);
       popUpForm.reset();
       avatarFormValidator.toggleButtonState();
+      avatarPopUp.closeModal();
+    })
+    .catch((err) => {
+      console.error(err); // log the error to the console
     })
     .finally(() => {
       popUpForm.querySelector(".modal__form-button").innerText = "Save";
-      avatarPopUp.closeModal();
     });
 }
-api.loadInfo().then((data) => {
-  const { name, about, avatar } = data;
-  newUserInfo.setUserInfo(name, about);
-  constants.profileAvatar.src = avatar;
-});
+api
+  .loadInfo()
+  .then((data) => {
+    const { name, about, avatar } = data;
+    newUserInfo.setUserInfo(name, about, avatar);
+  })
+  .catch((err) => {
+    console.error(err); // log the error to the console
+  });

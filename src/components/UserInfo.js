@@ -10,11 +10,9 @@ export class UserInfo {
     userInfoList.description = this._jobElement.textContent;
     return userInfoList;
   }
-  setUserInfo(name, description) {
+  setUserInfo(name, description, link) {
     this._nameElement.textContent = name;
     this._jobElement.textContent = description;
-  }
-  setAvatar(link) {
-    this._userAvatar = link;
+    this._userAvatar.src = link;
   }
 }
