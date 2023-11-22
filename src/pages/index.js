@@ -7,6 +7,7 @@ import { UserInfo } from "../components/UserInfo.js";
 import { PopupWithForm } from "../components/PopupWithForm.js";
 import * as constants from "../utils/constants.js";
 import { Api } from "../components/Api.js";
+import { data } from "autoprefixer";
 
 /* * functions    */
 const api = new Api({
@@ -39,14 +40,15 @@ dltPopup.setEventListeners();
 function handleDelete(id, card) {
   dltPopup.openModal();
   dltPopup.setSubmitAction(() => {
-    api.deleteCards(id).then(() => {
-      dltPopup.closeModal();
-      card.deleteUI();
-    })
-    .finally(()=>{
-      constants.dltFormSubmit
-      .innerText = "Yes";
-    })
+    api
+      .deleteCards(id)
+      .then(() => {
+        dltPopup.closeModal();
+        card.deleteUI();
+      })
+      .finally(() => {
+        constants.dltFormSubmit.innerText = "Yes";
+      });
   });
 }
 //Handler for the Like button
@@ -62,7 +64,7 @@ function handleToggleLikes(id, isLiked, card) {
   }
 }
 //FormValidation
-//profile name/description  
+//profile name/description
 const editFormValidator = new FormValidator(
   constants.settings,
   constants.profileEditForm
@@ -85,8 +87,6 @@ function handleFormFill(userInfoList) {
   constants.profileTitleInput.value = userInfoList.name;
   constants.profileDescriptionInput.value = userInfoList.description;
 }
-
-
 
 const profilePopup = new PopupWithForm(
   constants.selectors.profileSelector,
@@ -113,15 +113,12 @@ constants.profileEditButton.addEventListener("click", () => {
   return profilePopup.openModal();
 });
 constants.addButton.addEventListener("click", () => {
-  
   return cardPopUp.openModal();
 });
 
 constants.profileAvatar.addEventListener("click", () => {
-  
   return avatarPopUp.openModal();
 });
-
 
 //initializes new section renders inittial cards and new ones
 let cardSection;
@@ -153,16 +150,16 @@ function handleProfileEditSubmit(modalInputs, popUpForm) {
     });
 }
 function handleAddModalSubmit(modalInputs, popUpForm) {
+  const name = modalInputs.place;
+  const link = modalInputs.Url;
+  
   api
     .postCards(modalInputs)
-    .then(() => {
-      const name = modalInputs.place;
-      const link = modalInputs.Url;
-      const newCard = renderCard({ name, link });
+    .then((res) => {
+      const newCard = renderCard(res);
       cardSection.addItems(newCard);
       popUpForm.reset();
       addFormValidator.toggleButtonState();
-      
     })
     .finally(() => {
       popUpForm.querySelector(".modal__form-button").innerText = "Save";
@@ -178,7 +175,6 @@ function handleAvatarSubmit(modalInputs, popUpForm) {
       newUserInfo.setAvatar(link);
       popUpForm.reset();
       avatarFormValidator.toggleButtonState();
-      
     })
     .finally(() => {
       popUpForm.querySelector(".modal__form-button").innerText = "Save";

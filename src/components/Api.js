@@ -44,6 +44,7 @@ export class Api {
       }),
     }).then((res) => {
       this._handleResponse(res);
+      
     });
   }
   updateAvatar(modalInputs) {
@@ -61,15 +62,17 @@ export class Api {
   //Post new card to Api
   postCards(modalInputs) {
     const { place, Url } = modalInputs;
+    //let id; 
     return fetch(`${this._baseUrl}/cards`, {
       method: "POST",
       headers: this._headers,
       body: JSON.stringify({
         name: place,
-        link: Url,
+        link: Url
       }),
     }).then((res) => {
-      this._handleResponse(res);
+      return this._handleResponse(res);
+      
     });
   }
   deleteCards(id) {
