@@ -19,20 +19,17 @@ export default class Card {
   }
   _setEventListeners() {
     //like btn
-    this._cardElement
-      .querySelector(".gallery__card-button")
+    this._likeButton
       .addEventListener("click", () => {
         this._handleToggleLikes(this._id, this._isLiked, this);
         //this._handleLike();
       });
     //delete btn
-    this._cardElement
-      .querySelector(".gallery__card-delete")
+    this._trashButton
       .addEventListener("click", () => {
         this._handleDelete(this._id, this);
       }); //Image Popup
-    this._cardElement
-      .querySelector(".gallery__card-image")
+    this._cardImage
       .addEventListener("click", () => {
         this._handleCardClick(this._name, this._link);
       });
@@ -40,9 +37,7 @@ export default class Card {
 
   /**Event Handlers */
   handleLike() {
-    this._cardElement
-      .querySelector(".gallery__card-button")
-      .classList.toggle("gallery__card-button_active");
+    this._likeButton.classList.toggle("gallery__card-button_active");
   }
   _updateLikeStatus() {
     if (this._isLiked) {
@@ -67,9 +62,11 @@ export default class Card {
     // get card view
     this._card = this.getTemplate();
     this._likeButton = this._card.querySelector(".gallery__card-button");
-    this._card.querySelector(".gallery__card-image").src = this._link;
+    this._cardImage = this._card.querySelector(".gallery__card-image");
+    this._trashButton = this._card.querySelector(".gallery__card-delete");
+    this._cardImage.src = this._link;
     this._card.querySelector(".gallery__card-title").textContent = this._name;
-    this._card.querySelector(".gallery__card-image").alt =
+    this._cardImage.alt =
       "Photo of " + `${this._name}`;
     // set listeners
     this._updateLikeStatus();

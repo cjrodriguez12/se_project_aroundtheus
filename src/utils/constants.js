@@ -17,8 +17,8 @@ export const addButton = document.querySelector(".profile__add-button");
 export const avatarModal = document.querySelector("#avatar-modal");
 export const avatarForm = avatarModal.querySelector("#avatar-modal-form");
 export const profileAvatar = document.querySelector(".profile__avatar-img");
-export const dltPopup = document.querySelector("#delete-modal");
-export const dltFormSubmit = dltPopup.querySelector(".modal__form-button");
+export const confirmPopup = document.querySelector("#delete-modal");
+export const dltFormSubmit = confirmPopup.querySelector(".modal__form-button");
 export const settings = {
   inputSelector: ".modal__form-input",
   submitButtonSelector: ".modal__form-button",

@@ -32,15 +32,15 @@ function handleCardClick(name, link) {
   popUpImageModal.openModal(name, link);
 }
 //Popup for deleting cards from API along with handler
-const dltPopup = new PopupWithForm(constants.selectors.deleteSelector);
-dltPopup.setEventListeners();
+const confirmPopup = new PopupWithForm(constants.selectors.deleteSelector);
+confirmPopup.setEventListeners();
 function handleDelete(id, card) {
-  dltPopup.openModal();
-  dltPopup.setSubmitAction(() => {
+  confirmPopup.openModal();
+  confirmPopup.setSubmitAction(() => {
     api
       .deleteCards(id)
       .then(() => {
-        dltPopup.closeModal();
+        confirmPopup.closeModal();
         card.deleteUI();
       })
       .catch((err) => {
@@ -192,8 +192,7 @@ function handleAvatarSubmit(modalInputs, popUpForm) {
     .updateAvatar(modalInputs)
     .then(() => {
       const link = modalInputs.Url;
-      constants.profileAvatar.src = link;
-      newUserInfo.setAvatar(link);
+      constants.profileAvatar.src = newUserInfo.setUserInfo({},{},link);
       popUpForm.reset();
       avatarFormValidator.toggleButtonState();
       avatarPopUp.closeModal();

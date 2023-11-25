@@ -1,13 +1,10 @@
 import { data } from "autoprefixer";
 
 export class Api {
-  constructor() {
+  constructor({baseUrl, headers}) {
     // constructor body
-    this._baseUrl = "https://around-api.en.tripleten-services.com/v1";
-    this._headers = {
-      authorization: "2e65c592-5cc5-4cb0-a6bf-23fa612e6f57",
-      "Content-Type": "application/json",
-    };
+    this._baseUrl = baseUrl
+    this._headers = headers;
   }
   _handleResponse(res) {
     if (res.ok) {
