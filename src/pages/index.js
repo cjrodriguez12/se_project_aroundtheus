@@ -191,8 +191,7 @@ function handleAvatarSubmit(modalInputs, popUpForm) {
   api
     .updateAvatar(modalInputs)
     .then(() => {
-      const link = modalInputs.Url;
-      constants.profileAvatar.src = newUserInfo.setUserInfo({},{},link);
+      constants.profileAvatar.src = newUserInfo.setAvatar(modalInputs.Url);
       popUpForm.reset();
       avatarFormValidator.toggleButtonState();
       avatarPopUp.closeModal();
