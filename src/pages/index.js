@@ -191,7 +191,7 @@ function handleAvatarSubmit(modalInputs, popUpForm) {
   api
     .updateAvatar(modalInputs)
     .then(() => {
-      constants.profileAvatar.src = newUserInfo.setAvatar(modalInputs.Url);
+      newUserInfo.setAvatar(modalInputs.Url);
       popUpForm.reset();
       avatarFormValidator.toggleButtonState();
       avatarPopUp.closeModal();
@@ -207,7 +207,8 @@ api
   .loadInfo()
   .then((data) => {
     const { name, about, avatar } = data;
-    newUserInfo.setUserInfo(name, about, avatar);
+    newUserInfo.setUserInfo(name, about);
+    newUserInfo.setAvatar(avatar);
   })
   .catch((err) => {
     console.error(err); // log the error to the console
