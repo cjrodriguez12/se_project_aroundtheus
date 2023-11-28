@@ -25,18 +25,23 @@
       <main class="main">
         <section class="profile">
           <div class="profile__content">
-            <img
-              class="profile__avatar"
-              src="<%=require('./images/jacques-cousteau.jpg')%>"
-              alt="avatar"
-            />
+            <div class="profile__avatar">
+                <img
+                  class="profile__avatar-img"
+                  src=""
+                />
+                <img
+                class="profile__avatar-edit"
+                src="<%=require('./images/edit-pen.svg')%>"
+              />
+            </div>
             <div class="profile-column">
               <div class="profile__info">
-                <h1 class="profile__name">Jacques Cousteau</h1>
+                <h1 class="profile__name"></h1>
                 <button class="profile__edit" type="button"></button>
               </div>
 
-              <p class="profile__description">Explorer</p>
+              <p class="profile__description"></p>
             </div>
           </div>
           <button class="profile__add-button" type="button"></button>
@@ -92,11 +97,11 @@
         <button type="button" class="modal__container-close"></button>
       </div>
     </section>
-    <section class="modal" id="add-modal">
+    <section class="modal" id="card-modal">
       <div class="modal__container">
         <div class="modal__box">
           <h2 class="modal__box-title">New place</h2>
-          <form name="modal-form" class="modal__form" id="add-modal-form">
+          <form name="modal-form" class="modal__form" id="card-modal-form">
             <fieldset class="modal__form-fieldset">
               <label class="modal__form-label"
                 ><input
@@ -125,11 +130,40 @@
               ></label>
             </fieldset>
             <button
-              id="add-modal-submit"
+              id="card-modal-submit"
               type="submit"
               class="modal__form-button"
             >
               Create
+            </button>
+          </form>
+        </div>
+        <button type="button" class="modal__container-close"></button>
+      </div>
+    </section>
+    <section class="modal" id="avatar-modal">
+      <div class="modal__container">
+        <div class="modal__box">
+          <h2 class="modal__box-title">Change profile picture</h2>
+          <form name="modal-form" class="modal__form" id="avatar-modal-form">
+            <fieldset class="modal__form-fieldset">
+              <label class="modal__form-label"
+                ><input
+                  class="modal__form-input"
+                  id="URL-input"
+                  placeholder="Image URL"
+                  required
+                  type="url"
+                  name="Url" />
+                <span class="modal__form-error" id="URL-input-error"></span
+              ></label>
+            </fieldset>
+            <button
+              id="avatar-modal-submit"
+              type="submit"
+              class="modal__form-button"
+            >
+              Save
             </button>
           </form>
         </div>
@@ -143,6 +177,23 @@
           <img src="#" alt="" class="modal__image" />
           <h2 class="modal__box-image-title"></h2>
         </div>
+      </div>
+    </section>
+    <section class="modal" id="delete-modal">
+      <div class="modal__container">
+        <div class="modal__box">
+          <form name="modal-form" class="modal__form" id="delete-modal-form">
+          <h2 class="modal__box-title">Are you sure?</h2>
+          <button
+          id="delete-modal-submit"
+          type="submit"
+          class="modal__form-button"
+          >
+          Yes
+          </button>
+        </div>
+      </form>
+        <button type="button" class="modal__container-close"></button>
       </div>
     </section>
     <template id="card-template">

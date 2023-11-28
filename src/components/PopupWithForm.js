@@ -5,17 +5,22 @@ export class PopupWithForm extends Popup {
     this._popUpForm = this._popUpElement.querySelector(".modal__form");
     this._handleModalSubmit = handleModalSubmit;
   }
-  closeModal() {
-    this._popUpForm.reset();
-    super.closeModal();
-  }
+  // closeModal() {
+  //   this._popUpForm.reset();
+  //   super.closeModal();
+  // }
   setEventListeners() {
     super.setEventListeners();
     this._popUpForm.addEventListener("submit", (e) => {
-      e.preventDefault();
       const modalInputs = this._getInputValues();
-      this._handleModalSubmit(modalInputs);
+      e.preventDefault();
+      this._popUpForm.querySelector(".modal__form-button").innerText =
+        "Saving...";
+      this._handleModalSubmit(modalInputs, this._popUpForm);
     });
+  }
+  setSubmitAction(callBackfn) {
+    this._handleModalSubmit = callBackfn;
   }
   _getInputValues() {
     const modalInputs = {};
